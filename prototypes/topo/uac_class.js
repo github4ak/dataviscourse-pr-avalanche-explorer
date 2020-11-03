@@ -1,9 +1,20 @@
-class AvalancheLevel {
+class AvalancheDangerColor {
     static get low() { return '#00c346' }
     static get moderate() { return '#fcfc00' }
     static get considerate() { return '#ff9100' }
     static get high() { return '#cc332c' }
     static get extreme() { return '#222222' }
+
+    static get map() {
+        return [
+            null,
+            AvalancheDangerColor.low,
+            AvalancheDangerColor.moderate,
+            AvalancheDangerColor.considerate,
+            AvalancheDangerColor.high,
+            AvalancheDangerColor.extreme,
+        ]
+    }
 }
 
 class MapData {
@@ -35,11 +46,11 @@ class Map {
 
     classToColor(value) {
         if( value[0] <= 8 ) {
-            return AvalancheLevel.low;
+            return AvalancheDangerColor.map[1];
         } else if ( value[0] <= 16 ) {
-            return AvalancheLevel.moderate;
+            return AvalancheDangerColor.map[2];
         } else {
-            return AvalancheLevel.considerate;
+            return AvalancheDangerColor.map[3];
         }
     }
 
