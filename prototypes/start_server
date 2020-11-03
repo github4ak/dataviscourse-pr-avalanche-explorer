@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source /data/miniconda3/etc/profile.d/conda.sh
+conda activate uac-explorer
+
+PORT=${1:-3001}
+
+echo $(which node)
+
+chromium http://127.0.0.1:$PORT &
+
+http-server -c -1 -p $PORT
+
