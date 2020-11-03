@@ -15,7 +15,7 @@ class MapData {
     static get centerCoords() { return [40.60, -111.67]; }
 
     static get attribution() {
-        return '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
+        return '&copy; <a href="https://www.openstreetmap.org/copyright">OpenTopoMap</a> (CC-BY-SA)';
     }
 }
 
@@ -24,9 +24,11 @@ class Map {
         this.baseLayer = L.map("map-area").setView(
             MapData.centerCoords, MapData.zoomLevel
         );
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+        L.tileLayer('https://a.tile.opentopomap.org/{z}/{x}/{y}.png',
             {
-                attribution: MapData.attribution
+                attribution: MapData.attribution,
+                maxZoom: 17,
             }
         ).addTo(this.baseLayer);
     }
