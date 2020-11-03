@@ -47,7 +47,7 @@ class Map {
         /**
          * https://github.com/GeoTIFF/georaster-layer-for-leaflet
          */
-        this.Dangerlayer = new window.GeoRasterLayer({
+        this.dangerlayer = new window.GeoRasterLayer({
             georaster: layerData,
             opacity: 0.4,
             pixelValuesToColorFn: values => {
@@ -56,7 +56,7 @@ class Map {
             debugLevel: 0,
         });
 
-        this.Dangerlayer.addTo(this.baseLayer);
+        this.dangerlayer.addTo(this.baseLayer);
         // this.baseLayer.fitBounds(this.Dangerlayer.getBounds());
     }
 
