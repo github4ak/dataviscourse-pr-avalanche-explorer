@@ -11,7 +11,7 @@ class MapData {
     }
 }
 
-class Map {
+class AreaMap {
     get currentMarker() { return this._currentMarker; }
     set currentMarker(marker) { this._currentMarker = marker; }
 
