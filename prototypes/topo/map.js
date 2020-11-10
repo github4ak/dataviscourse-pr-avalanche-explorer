@@ -53,9 +53,9 @@ class Map {
     }
 
     classToColor(value) {
-        if( value[0] <= 8 ) {
+        if( value[0] <= UACMapper.LOW_ELEVATION_IDS.max ) {
             return AvalancheDangerColor.map.Low;
-        } else if ( value[0] <= 16 ) {
+        } else if ( value[0] <= UACMapper.MID_ELEVATION_IDS.max ) {
             return AvalancheDangerColor.map.Moderate;
         } else {
             return AvalancheDangerColor.map.Considerate;
@@ -122,8 +122,9 @@ class Map {
             const x = this.lngToRasterX(lng);
             const y = this.latToRasterY(lat);
             const uacID = this.uacClassInfo[y][x];
-            return `UAC class: ${UACMapper.id[uacID].Elevation}</br>` +
-                `Aspect: ${UACMapper.id[uacID].Aspect}</br>` +
+            const info = UACMapper.byId[uacID]
+            return `UAC class: ${info.Elevation}</br>` +
+                `Aspect: ${info.Aspect}</br>` +
                 `Slope Angle: ${this.slopeInfo[y][x]}`;
         }
         catch(err) {
