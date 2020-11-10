@@ -18,31 +18,31 @@ class UACMapper {
                 'Elevation': UACMapper.lowElevation
             },
             2: {
-                'Aspect': 'North',
+                'Aspect': 'NE',
                 'Elevation': UACMapper.lowElevation
             },
             3: {
-                'Aspect': 'North',
+                'Aspect': 'East',
                 'Elevation': UACMapper.lowElevation
             },
             4: {
-                'Aspect': 'North',
+                'Aspect': 'SE',
                 'Elevation': UACMapper.lowElevation
             },
             5: {
-                'Aspect': 'North',
+                'Aspect': 'South',
                 'Elevation': UACMapper.lowElevation
             },
             6: {
-                'Aspect': 'North',
+                'Aspect': 'SW',
                 'Elevation': UACMapper.lowElevation
             },
             7: {
-                'Aspect': 'North',
+                'Aspect': 'West',
                 'Elevation': UACMapper.lowElevation
             },
             8: {
-                'Aspect': 'North',
+                'Aspect': 'NW',
                 'Elevation': UACMapper.lowElevation
             },
             9: {
@@ -50,31 +50,31 @@ class UACMapper {
                 'Elevation': UACMapper.midElevation
             },
             10: {
-                'Aspect': 'North',
+                'Aspect': 'NE',
                 'Elevation': UACMapper.midElevation
             },
             11: {
-                'Aspect': 'North',
+                'Aspect': 'East',
                 'Elevation': UACMapper.midElevation
             },
             12: {
-                'Aspect': 'North',
+                'Aspect': 'SE',
                 'Elevation': UACMapper.midElevation
             },
             13: {
-                'Aspect': 'North',
+                'Aspect': 'South',
                 'Elevation': UACMapper.midElevation
             },
             14: {
-                'Aspect': 'North',
+                'Aspect': 'SW',
                 'Elevation': UACMapper.midElevation
             },
             15: {
-                'Aspect': 'North',
+                'Aspect': 'West',
                 'Elevation': UACMapper.midElevation
             },
             16: {
-                'Aspect': 'North',
+                'Aspect': 'NW',
                 'Elevation': UACMapper.midElevation
             },
             17: {
@@ -82,31 +82,31 @@ class UACMapper {
                 'Elevation': UACMapper.highElevation
             },
             18: {
-                'Aspect': 'North',
+                'Aspect': 'NE',
                 'Elevation': UACMapper.highElevation
             },
             19: {
-                'Aspect': 'North',
+                'Aspect': 'East',
                 'Elevation': UACMapper.highElevation
             },
             20: {
-                'Aspect': 'North',
+                'Aspect': 'SE',
                 'Elevation': UACMapper.highElevation
             },
             21: {
-                'Aspect': 'North',
+                'Aspect': 'South',
                 'Elevation': UACMapper.highElevation
             },
             22: {
-                'Aspect': 'North',
+                'Aspect': 'SE',
                 'Elevation': UACMapper.highElevation
             },
             23: {
-                'Aspect': 'North',
+                'Aspect': 'West',
                 'Elevation': UACMapper.highElevation
             },
             24: {
-                'Aspect': 'North',
+                'Aspect': 'NW',
                 'Elevation': UACMapper.highElevation
             },
         }
