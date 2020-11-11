@@ -1,6 +1,6 @@
 class MapData {
     static get uacClasses() {
-        return 'LCC_uac_30m_4326.tif'
+        return '../data/LCC_uac_30m_4326.tif'
     }
 
     static get zoomLevel() { return 12; }

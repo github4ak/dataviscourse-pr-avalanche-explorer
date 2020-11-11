@@ -37,8 +37,8 @@ class Rose {
             }
         }
 
-        let svgWidth = 1000;
-        let svgHeight = 1000;
+        let svgWidth = 500;
+        let svgHeight = 500;
 
         let pie_angle_array = [Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4];
 
@@ -46,15 +46,15 @@ class Rose {
 
         let level_1_arc = d3.arc()
                             .innerRadius(0)
-                            .outerRadius(75);
+                            .outerRadius(50);
 
         let level_2_arc = d3.arc()
-                            .innerRadius(75)
-                            .outerRadius(150);
+                            .innerRadius(50)
+                            .outerRadius(100);
 
         let level_3_arc = d3.arc()
-                            .innerRadius(150)
-                            .outerRadius(225);
+                            .innerRadius(100)
+                            .outerRadius(150);
 
         let div = d3.select("#rose-view");
 
@@ -108,7 +108,7 @@ class Rose {
                             .style("stroke-width", "1px")
                             .attr("d", level_3_arc);
 
-        let arc_length = 270;
+        let arc_length = 180;
 
         let x_text_location = [0,1/Math.SQRT2,1,1/Math.SQRT2,0,-(1/Math.SQRT2),-1,-(1/Math.SQRT2)]
         let y_text_location = [-1,-(1/Math.SQRT2),0,1/Math.SQRT2,1,1/Math.SQRT2,0,-(1/Math.SQRT2)]
