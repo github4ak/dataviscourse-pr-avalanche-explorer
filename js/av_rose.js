@@ -66,7 +66,7 @@ class Rose {
                 return "level-1-petal-"+(i+1); 
             })
             .style("fill", function (d, i) {
-                return d3.color(that.getColor(level_1_data[i]));
+                return AvalancheDangerColor.colorForId(level_1_data[i])
             })
             .attr("d", level_1_arc);
 
@@ -78,7 +78,7 @@ class Rose {
                 return "level-1-petal-"+(i+9); 
             })
             .style("fill", function (d, i) {
-                return d3.color(that.getColor(level_2_data[i]));
+                return AvalancheDangerColor.colorForId(level_2_data[i])
             })
             .attr("d", level_2_arc);
 
@@ -90,7 +90,7 @@ class Rose {
                 return "level-1-petal-"+(i+17); 
             })
             .style("fill", function (d, i) {
-                return d3.color(that.getColor(level_3_data[i]));
+                return AvalancheDangerColor.colorForId(level_3_data[i])
             })
             .attr("d", level_3_arc);
 
@@ -112,28 +112,5 @@ class Rose {
             .text(function (d, i) {
                 return direction_string_array[i];
             });
-    }
-
-    getColor(colorValue) {
-        switch(colorValue) {
-            case 1:
-                return AvalancheDangerColor.map.Low;
-
-            case 2:
-                return AvalancheDangerColor.map.Moderate;
-
-            case 3:
-                return AvalancheDangerColor.map.Considerate;
-
-            case 4:
-                return AvalancheDangerColor.map.High;
-
-            case 5:
-                return AvalancheDangerColor.map.Extreme;
-            
-            default:
-                throw "Invalid rose petal color value: "+colorValue
-            
-        }
     }
 }
