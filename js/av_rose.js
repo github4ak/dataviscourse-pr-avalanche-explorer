@@ -10,13 +10,6 @@ class Rose {
         const level_string = "level";
         const direction_string_array = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
 
-        let rose_color = new Map()
-        rose_color.set(1, "#00BF00");
-        rose_color.set(2, "#FFFF00");
-        rose_color.set(3, "#FFA500");
-        rose_color.set(4, "#FF0000");
-        rose_color.set(5, "#000000");
-
 
         // TODO: Get today's data
         let todayData = that.data[0];
@@ -73,7 +66,7 @@ class Rose {
                 return "level-1-petal-"+(i+1); 
             })
             .style("fill", function (d, i) {
-                return d3.color(rose_color.get(level_1_data[i]));
+                return d3.color(that.getColor(level_1_data[i]));
             })
             .style("stroke", "#000000")
             .style("stroke-width", "1px")
@@ -87,7 +80,7 @@ class Rose {
                 return "level-1-petal-"+(i+9); 
             })
             .style("fill", function (d, i) {
-                return d3.color(rose_color.get(level_2_data[i]));
+                return d3.color(that.getColor(level_2_data[i]));
             })
             .style("stroke", "#000000")
             .style("stroke-width", "1px")
@@ -101,7 +94,7 @@ class Rose {
                 return "level-1-petal-"+(i+17); 
             })
             .style("fill", function (d, i) {
-                return d3.color(rose_color.get(level_3_data[i]));
+                return d3.color(that.getColor(level_3_data[i]));
             })
             .style("stroke", "#000000")
             .style("stroke-width", "1px")
@@ -126,5 +119,28 @@ class Rose {
             .text(function (d, i) {
                 return direction_string_array[i];
             });
+    }
+
+    getColor(colorValue) {
+        switch(colorValue) {
+            case 1:
+                return AvalancheDangerColor.map.Low;
+
+            case 2:
+                return AvalancheDangerColor.map.Moderate;
+
+            case 3:
+                return AvalancheDangerColor.map.Considerate;
+
+            case 4:
+                return AvalancheDangerColor.map.High;
+
+            case 5:
+                return AvalancheDangerColor.map.Extreme;
+            
+            default:
+                throw "Invalid rose petal color value: "+colorValue
+            
+        }
     }
 }
