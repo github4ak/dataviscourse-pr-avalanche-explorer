@@ -1,5 +1,5 @@
 # Class project: Avalanche Forecast Explorer
-CS 6630 Data Visualization for Data Science 
+CS 6630 Visualization for Data Science
 
 Term: Fall 2020
 
