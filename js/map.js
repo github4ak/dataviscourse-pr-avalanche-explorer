@@ -23,14 +23,15 @@ class AreaMap {
         this.removeMarker();
         this.currentMarker = L.marker(e.latlng);
         this.currentMarker.addTo(this.baseLayer);
-        const popup = this.currentMarker.bindPopup(
+        this.currentMarker.bindPopup(
             this.infoAtLatLng(e.latlng.lat, e.latlng.lng)
         ).openPopup();
     }
 
     get uacClassInfo() {
-       return this.raster.values[0];
+        return this.raster.values[0];
     }
+
     get slopeInfo() {
         return this.raster.values[1];
     }
@@ -47,15 +48,15 @@ class AreaMap {
         ).addTo(this.baseLayer);
 
         const that = this;
-        this.baseLayer.on('click', function() {
+        this.baseLayer.on('click', function () {
             that.removeMarker();
         })
     }
 
     classToColor(value) {
-        if( value[0] <= UACMapper.LOW_ELEVATION_IDS.max ) {
+        if (value[0] <= UACMapper.LOW_ELEVATION_IDS.max) {
             return AvalancheDangerColor.low;
-        } else if ( value[0] <= UACMapper.MID_ELEVATION_IDS.max ) {
+        } else if (value[0] <= UACMapper.MID_ELEVATION_IDS.max) {
             return AvalancheDangerColor.moderate;
         } else {
             return AvalancheDangerColor.considerate;
@@ -117,7 +118,7 @@ class AreaMap {
         )
     }
 
-     infoAtLatLng (lat, lng) {
+    infoAtLatLng(lat, lng) {
         try {
             const x = this.lngToRasterX(lng);
             const y = this.latToRasterY(lat);
@@ -126,8 +127,7 @@ class AreaMap {
             return `UAC class: ${info.Elevation}</br>` +
                 `Aspect: ${info.Aspect}</br>` +
                 `Slope Angle: ${this.slopeInfo[y][x]}`;
-        }
-        catch(err) {
+        } catch (err) {
             return 'No value';
         }
     }
