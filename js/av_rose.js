@@ -116,7 +116,7 @@ class Rose {
             .data(direction_string_array)
             .enter()
             .append("text")
-            .attr("transform", "translate(0," + -440 + ")")
+            .attr("transform", "translate(0,-440)")
             .attr("x", function (d, i) {
                 return arc_length * x_text_location[i];
             })
