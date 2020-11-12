@@ -3,6 +3,18 @@
     width: 100%;
 }
 
+#rose-view {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
 #rose-diagram g {
-    transform: translate(50%, 130%);
+    transform: translate(50%, 50%);
+}
+
+#rose-diagram path {
+    stroke: #000000;
+    stroke-width: 2px;
+    stroke-opacity: 50%;
 }
