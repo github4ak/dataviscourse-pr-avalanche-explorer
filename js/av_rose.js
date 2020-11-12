@@ -1,5 +1,5 @@
 class Rose {
-    constructor(data){
+    constructor(data) {
         this.data = data;
     }
 
@@ -8,7 +8,7 @@ class Rose {
 
         const data_string = "data";
         const level_string = "level";
-        const direction_string_array = ["N","NE","E","SE","S","SW","W","NW"];
+        const direction_string_array = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
 
         let rose_color = new Map()
         rose_color.set(1, "#00BF00");
@@ -17,7 +17,7 @@ class Rose {
         rose_color.set(4, "#FF0000");
         rose_color.set(5, "#000000");
 
-        
+
         // TODO: Get today's data
         let todayData = that.data[0];
 
@@ -25,106 +25,115 @@ class Rose {
         let level_2_data = [];
         let level_3_data = [];
 
-        for(let i=0; i<24; i++){
-            if(i < 8){
-                level_1_data.push(todayData[data_string+"/"+level_string+"-1/"+direction_string_array[i%8]]);
+        for (let i = 0; i < 24; i++) {
+            if (i < 8) {
+                level_1_data.push(todayData[data_string + "/" + level_string + "-1/" + direction_string_array[i % 8]]);
             }
-            else if(i>=8 && i <16){
-                level_2_data.push(todayData[data_string+"/"+level_string+"-2/"+direction_string_array[i%8]]);
+            else if (i >= 8 && i < 16) {
+                level_2_data.push(todayData[data_string + "/" + level_string + "-2/" + direction_string_array[i % 8]]);
             }
             else {
-                level_3_data.push(todayData[data_string+"/"+level_string+"-2/"+direction_string_array[i%8]]);
+                level_3_data.push(todayData[data_string + "/" + level_string + "-2/" + direction_string_array[i % 8]]);
             }
         }
 
         let svgWidth = 500;
         let svgHeight = 500;
 
-        let pie_angle_array = [Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4,Math.PI/4];
+        let pie_angle_array = [Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4];
 
         let arcs = d3.pie()(pie_angle_array);
 
         let level_1_arc = d3.arc()
-                            .innerRadius(0)
-                            .outerRadius(50);
+            .innerRadius(0)
+            .outerRadius(50);
 
         let level_2_arc = d3.arc()
-                            .innerRadius(50)
-                            .outerRadius(100);
+            .innerRadius(50)
+            .outerRadius(100);
 
         let level_3_arc = d3.arc()
-                            .innerRadius(100)
-                            .outerRadius(150);
+            .innerRadius(100)
+            .outerRadius(150);
 
         let div = d3.select("#rose-view");
 
         let svg = div.append("svg")
-                    .attr("id","rose-diagram")
-                    .attr("width",svgWidth)
-                    .attr("height",svgHeight);
+            .attr("id", "rose-diagram")
+            .attr("width", svgWidth)
+            .attr("height", svgHeight);
 
         let g_level_1 = svg.append("g")
-                            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 +")");
-        
+            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
+
         let g_level_2 = svg.append("g")
-                            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 +")");
+            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
 
         let g_level_3 = svg.append("g")
-                            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 +")");
-        
+            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
+
         let g_text = svg.append("g")
-                        .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 +")");
-        
+            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
+
         let level_1_circle = g_level_1.selectAll("path")
-                            .data(arcs)
-                            .enter()
-                            .append("path")
-                            .style("fill", function(d,i){
-                                    return d3.color(rose_color.get(level_1_data[i]));
-                                    })
-                            .style("stroke", "#000000")
-                            .style("stroke-width", "1px")
-                            .attr("d", level_1_arc);
-        
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("id", function (d, i) { 
+                return "level-1-petal-"+(i+1); 
+            })
+            .style("fill", function (d, i) {
+                return d3.color(rose_color.get(level_1_data[i]));
+            })
+            .style("stroke", "#000000")
+            .style("stroke-width", "1px")
+            .attr("d", level_1_arc);
+
         let level_2_circle = g_level_2.selectAll("path")
-                            .data(arcs)
-                            .enter()
-                            .append("path")
-                            .style("fill", function(d,i){
-                                    return d3.color(rose_color.get(level_2_data[i]));
-                                    })
-                            .style("stroke", "#000000")
-                            .style("stroke-width", "1px")
-                            .attr("d", level_2_arc);
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("id", function (d, i) { 
+                return "level-1-petal-"+(i+9); 
+            })
+            .style("fill", function (d, i) {
+                return d3.color(rose_color.get(level_2_data[i]));
+            })
+            .style("stroke", "#000000")
+            .style("stroke-width", "1px")
+            .attr("d", level_2_arc);
 
         let level_3_circle = g_level_3.selectAll("path")
-                            .data(arcs)
-                            .enter()
-                            .append("path")
-                            .style("fill", function(d,i){
-                                    return d3.color(rose_color.get(level_3_data[i]));
-                                    })
-                            .style("stroke", "#000000")
-                            .style("stroke-width", "1px")
-                            .attr("d", level_3_arc);
+            .data(arcs)
+            .enter()
+            .append("path")
+            .attr("id", function (d, i) { 
+                return "level-1-petal-"+(i+17); 
+            })
+            .style("fill", function (d, i) {
+                return d3.color(rose_color.get(level_3_data[i]));
+            })
+            .style("stroke", "#000000")
+            .style("stroke-width", "1px")
+            .attr("d", level_3_arc);
 
         let arc_length = 180;
 
-        let x_text_location = [0,1/Math.SQRT2,1,1/Math.SQRT2,0,-(1/Math.SQRT2),-1,-(1/Math.SQRT2)]
-        let y_text_location = [-1,-(1/Math.SQRT2),0,1/Math.SQRT2,1,1/Math.SQRT2,0,-(1/Math.SQRT2)]
+        let x_text_location = [0, 1 / Math.SQRT2, 1, 1 / Math.SQRT2, 0, -(1 / Math.SQRT2), -1, -(1 / Math.SQRT2)]
+        let y_text_location = [-1, -(1 / Math.SQRT2), 0, 1 / Math.SQRT2, 1, 1 / Math.SQRT2, 0, -(1 / Math.SQRT2)]
 
-        let level_3_text =  g_text.selectAll("path")
-                                    .data(direction_string_array)
-                                    .enter()
-                                    .append("text")
-                                    .attr("x", function(d,i){
-                                        return arc_length * x_text_location[i] ;
-                                    })
-                                    .attr("y", function(d,i){
-                                        return arc_length * y_text_location[i] ;
-                                    })
-                                    .text(function(d,i){
-                                            return direction_string_array[i];
-                                    });
+        let level_3_text = g_text.selectAll("path")
+            .data(direction_string_array)
+            .enter()
+            .append("text")
+            .attr("x", function (d, i) {
+                return arc_length * x_text_location[i];
+            })
+            .attr("y", function (d, i) {
+                return arc_length * y_text_location[i];
+            })
+            .text(function (d, i) {
+                return direction_string_array[i];
+            });
     }
 }
