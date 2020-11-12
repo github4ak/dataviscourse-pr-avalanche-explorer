@@ -37,9 +37,6 @@ class Rose {
             }
         }
 
-        let svgWidth = 500;
-        let svgHeight = 500;
-
         let pie_angle_array = [Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4];
 
         let arcs = d3.pie()(pie_angle_array);
@@ -60,20 +57,13 @@ class Rose {
 
         let svg = div.append("svg")
             .attr("id", "rose-diagram")
-            .attr("width", svgWidth)
-            .attr("height", svgHeight);
+            .attr("width", "100%")
+            .attr("height", "100%");
 
         let g_level_1 = svg.append("g")
-            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
-
         let g_level_2 = svg.append("g")
-            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
-
         let g_level_3 = svg.append("g")
-            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
-
         let g_text = svg.append("g")
-            .attr("transform", "translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
 
         let level_1_circle = g_level_1.selectAll("path")
             .data(arcs)
