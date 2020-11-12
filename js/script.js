@@ -1,7 +1,12 @@
+// Leaflet needs to be loaded first.
+// See below for reasoning.
+window.currentMap = new AreaMap();
+window.currentMap.load();
+
+// Draw rose after the Leaflet map, as Leaflet is
+// interfering with positioning otherwise.
 d3.json('data/january_2020.json').then(data => {
     let rose = new Rose(data);
     rose.drawRose();
 
-    window.currentMap = new AreaMap();
-    window.currentMap.load();
 });

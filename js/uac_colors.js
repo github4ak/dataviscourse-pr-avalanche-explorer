@@ -5,14 +5,20 @@ class AvalancheDangerColor {
     static get high() { return '#cc332c' }
     static get extreme() { return '#222222' }
 
-    static get map() {
-        return {
-           'None':  null,
-           'Low':  AvalancheDangerColor.low,
-           'Moderate':  AvalancheDangerColor.moderate,
-           'Considerate':  AvalancheDangerColor.considerate,
-           'High':  AvalancheDangerColor.high,
-           'Extreme':  AvalancheDangerColor.extreme,
+    static colorForId(id) {
+        try {
+            return AvalancheDangerColor.ALL[id]
+        } catch {
+            throw `Invalid rose petal color value: ${id}`;
         }
     }
 }
+
+AvalancheDangerColor.ALL = [
+    null,
+    AvalancheDangerColor.low,
+    AvalancheDangerColor.moderate,
+    AvalancheDangerColor.considerate,
+    AvalancheDangerColor.high,
+    AvalancheDangerColor.extreme,
+]
