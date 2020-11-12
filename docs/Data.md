@@ -15,10 +15,6 @@ This step was based on classifying the DEM by
 [elevation band](data/elevation_class.txt) and 
 [aspect class](data/aspect_class.txt) beforehand.
 
-Last step after the UAC classes were generate on the raster was to 
-['polygonize'](https://gdal.org/programs/gdal_polygonize.html)the data into 
-GeoJson format.
-
 The raster math given in the descriptions and all other processing steps can 
 be executed via command line through [GDAL](https://gdal.org) or through 
 a GIS GUI like [QGIS](https://www.qgis.org/en/site/).
