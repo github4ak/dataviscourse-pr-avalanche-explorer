@@ -1,4 +1,6 @@
 class Rose {
+    get radius() { return 50; }
+
     constructor(data) {
         this.data = data;
     }
@@ -36,15 +38,15 @@ class Rose {
 
         let level_1_arc = d3.arc()
             .innerRadius(0)
-            .outerRadius(50);
+            .outerRadius(this.radius);
 
         let level_2_arc = d3.arc()
-            .innerRadius(50)
-            .outerRadius(100);
+            .innerRadius(this.radius)
+            .outerRadius(2 * this.radius);
 
         let level_3_arc = d3.arc()
-            .innerRadius(100)
-            .outerRadius(150);
+            .innerRadius(2 * this.radius)
+            .outerRadius(3 * this.radius);
 
         let div = d3.select("#rose-view");
 
