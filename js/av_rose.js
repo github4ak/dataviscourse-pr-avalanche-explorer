@@ -32,9 +32,8 @@ class Rose {
             }
         }
 
-        let pie_angle_array = [Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4, Math.PI / 4];
-
-        let arcs = d3.pie()(pie_angle_array);
+        const quarterPie = Math.PI / 4;
+        let arcs = d3.pie()(Array(8).fill(quarterPie));
 
         let level_1_arc = d3.arc()
             .innerRadius(0)
