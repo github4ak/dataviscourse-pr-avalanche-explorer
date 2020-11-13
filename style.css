@@ -18,3 +18,9 @@
     stroke-width: 2px;
     stroke-opacity: 50%;
 }
+
+#dropdown-view {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+}
