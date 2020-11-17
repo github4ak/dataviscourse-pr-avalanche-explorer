@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+#warn-uac {
+    font-size: 1.2em;
+}
+
 #rose-view {
     position: absolute;
     height: 100%;
