@@ -34,20 +34,18 @@ class Rose {
         });
     }
 
+    levelArcs(innerRadius, outerRadius) {
+        const eighthPie = Math.PI / 8;
+        return d3.arc()
+            .innerRadius(innerRadius)
+            .outerRadius(outerRadius)
+            .startAngle(d => { return d.startAngle - eighthPie })
+            .endAngle(d => { return d.endAngle - eighthPie });
+    }
+
     draw() {
         const quarterPie = Math.PI / 4;
-
-        let level_1_arc = d3.arc()
-            .innerRadius(0)
-            .outerRadius(this.radius);
-
-        let level_2_arc = d3.arc()
-            .innerRadius(this.radius)
-            .outerRadius(2 * this.radius);
-
-        let level_3_arc = d3.arc()
-            .innerRadius(2 * this.radius)
-            .outerRadius(3 * this.radius);
+        const slices = Array(8).fill(quarterPie);
 
         const div = d3.select("#rose-view");
 
@@ -56,7 +54,7 @@ class Rose {
             .attr("width", "100%")
             .attr("height", "100%");
 
-        let arcs = d3.pie()(Array(8).fill(quarterPie));
+        let arcs = d3.pie()(slices);
         this.addForecastID(arcs, 1);
         this.svg.append("g")
             .selectAll("path")
@@ -65,9 +63,9 @@ class Rose {
             .append("path")
             .attr('fill', 'none')
             .classed('petal', true)
-            .attr("d", level_1_arc);
+            .attr("d", this.levelArcs(0, this.radius));
 
-        arcs = d3.pie()(Array(8).fill(quarterPie));
+        arcs = d3.pie()(slices);
         this.addForecastID(arcs, 9);
         this.svg.append("g")
             .selectAll("path")
@@ -76,9 +74,9 @@ class Rose {
             .append("path")
             .classed('petal', true)
             .attr('fill', 'none')
-            .attr("d", level_2_arc);
+            .attr("d", this.levelArcs(this.radius, 2 * this.radius));
 
-        arcs = d3.pie()(Array(8).fill(quarterPie));
+        arcs = d3.pie()(slices);
         this.addForecastID(arcs, 17);
         this.svg.append("g")
             .selectAll("path")
@@ -87,7 +85,7 @@ class Rose {
             .append("path")
             .attr('fill', 'none')
             .classed('petal', true)
-            .attr("d", level_3_arc);
+            .attr("d", this.levelArcs(2 * this.radius, 3 * this.radius));
 
         let arc_length = 180;
 
