@@ -22,31 +22,30 @@ class RoseData {
 RoseData.DATA_PREFIX = 'data/level';
 
 class Rose {
-    get radius() { return 50; }
-
     constructor(data) {
         this.data = RoseData.parse(data);
     }
 
-    addForecastID(arc, offset) {
-        arc.forEach((el, index) => {
-            el[Rose.FORECAST_ID] = offset + index;
-        });
+    levelArcs(level) {
+        return d3.arc()
+            .innerRadius((level - 1) * Rose.RADIUS)
+            .outerRadius(level * Rose.RADIUS)
+            .startAngle(d => { return d.startAngle - Rose.PETAL_OFFSET })
+            .endAngle(d => { return d.endAngle - Rose.PETAL_OFFSET });
     }
 
-    levelArcs(innerRadius, outerRadius) {
-        const eighthPie = Math.PI / 8;
-        return d3.arc()
-            .innerRadius(innerRadius)
-            .outerRadius(outerRadius)
-            .startAngle(d => { return d.startAngle - eighthPie })
-            .endAngle(d => { return d.endAngle - eighthPie });
+    addElevationLevel(ids, level) {
+        this.svg.append("g")
+            .selectAll("path")
+            .data(d3.pie().value(() => Rose.PETAL_ARC)(ids))
+            .enter()
+            .append("path")
+            .attr('fill', 'none')
+            .classed('petal', true)
+            .attr("d", this.levelArcs(level));
     }
 
     draw() {
-        const quarterPie = Math.PI / 4;
-        const slices = Array(8).fill(quarterPie);
-
         const div = d3.select("#rose-view");
 
         this.svg = div.append("svg")
@@ -54,38 +53,9 @@ class Rose {
             .attr("width", "100%")
             .attr("height", "100%");
 
-        let arcs = d3.pie()(slices);
-        this.addForecastID(arcs, 1);
-        this.svg.append("g")
-            .selectAll("path")
-            .data(arcs)
-            .enter()
-            .append("path")
-            .attr('fill', 'none')
-            .classed('petal', true)
-            .attr("d", this.levelArcs(0, this.radius));
-
-        arcs = d3.pie()(slices);
-        this.addForecastID(arcs, 9);
-        this.svg.append("g")
-            .selectAll("path")
-            .data(arcs)
-            .enter()
-            .append("path")
-            .classed('petal', true)
-            .attr('fill', 'none')
-            .attr("d", this.levelArcs(this.radius, 2 * this.radius));
-
-        arcs = d3.pie()(slices);
-        this.addForecastID(arcs, 17);
-        this.svg.append("g")
-            .selectAll("path")
-            .data(arcs)
-            .enter()
-            .append("path")
-            .attr('fill', 'none')
-            .classed('petal', true)
-            .attr("d", this.levelArcs(2 * this.radius, 3 * this.radius));
+        this.addElevationLevel(UACMapper.LOW_ELEVATION_IDS.all, 1)
+        this.addElevationLevel(UACMapper.MID_ELEVATION_IDS.all, 2)
+        this.addElevationLevel(UACMapper.HIGH_ELEVATION_IDS.all, 3)
 
         let arc_length = 180;
 
@@ -112,11 +82,11 @@ class Rose {
         this.svg
             .selectAll('.petal')
             .attr("fill", (d) => {
-                return AvalancheDangerColor.colorForId(
-                    forecast[d[Rose.FORECAST_ID]]
-                )
+                return AvalancheDangerColor.colorForId(forecast[d.data])
             });
     }
 }
 Rose.DIRECTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-Rose.FORECAST_ID = 'forecast-id';
+Rose.RADIUS = 50;
+Rose.PETAL_ARC = Math.PI / 4;
+Rose.PETAL_OFFSET = Math.PI / 8;
