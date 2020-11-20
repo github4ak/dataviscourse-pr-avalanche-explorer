@@ -27,9 +27,10 @@ class Rose {
     }
 
     levelArcs(level) {
+        const offset = level - 1
         return d3.arc()
-            .innerRadius((level - 1) * Rose.RADIUS)
-            .outerRadius(level * Rose.RADIUS)
+            .innerRadius(offset * Rose.RADIUS + offset)
+            .outerRadius(level * Rose.RADIUS + offset)
             .startAngle(d => { return d.startAngle - Rose.PETAL_OFFSET })
             .endAngle(d => { return d.endAngle - Rose.PETAL_OFFSET });
     }
@@ -42,7 +43,13 @@ class Rose {
             .append("path")
             .attr('fill', 'none')
             .classed('petal', true)
-            .attr("d", this.levelArcs(level));
+            .attr("d", this.levelArcs(level))
+            .on('mouseover', function () {
+                d3.select(this).classed('hover', true).raise();
+            })
+            .on('mouseout', function () {
+                d3.select(this).classed('hover', false);
+            });
     }
 
     draw() {
