@@ -67,7 +67,8 @@ class AreaMap {
             this.forecast[value[0]]
         );
 
-        if (this.selection !== undefined && this.selection !== value[0] ) {
+        if (this.selection !== undefined &&
+            !this.selection.includes(value[0])) {
             color += '77';  // Set Alpha channel for color
         }
 

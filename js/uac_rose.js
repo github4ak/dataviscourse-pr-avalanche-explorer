@@ -54,8 +54,9 @@ class Rose {
             })
             .on('click', (e, d) => {
                 e.stopPropagation();
-                this.map.selection = d.data;
+                this.map.selection = [d.data];
                 this.map.redraw();
+                this.menu.clear();
             });
     }
 
@@ -68,7 +69,9 @@ class Rose {
             .attr("height", "100%")
             .on('click',  (e, d) => {
                 e.stopPropagation();
-                this.map.selection = undefined
+                this.map.selection = undefined;
+                this.map.removeMarker();
+                this.menu.clear();
                 this.map.redraw();
             });
 
