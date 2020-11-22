@@ -1,5 +1,3 @@
-window.currentDropdown = new Dropdown();
-window.currentDropdown.load()
 
 d3.json('data/january_2020.json').then(data => {
     const currentMap = new AreaMap();

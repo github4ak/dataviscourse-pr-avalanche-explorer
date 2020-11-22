@@ -25,6 +25,7 @@ class Rose {
     constructor(data, map) {
         this.data = RoseData.parse(data);
         this.map = map;
+        this.menu = new RoseMenu(this);
     }
 
     levelArcs(level) {
@@ -92,6 +93,8 @@ class Rose {
                 return arc_length * y_text_location[i];
             })
             .text((d) => d);
+
+        this.menu.addOptions();
     }
 
     showForecast(date = null) {

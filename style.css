@@ -10,8 +10,15 @@
 #rose-view {
     position: absolute;
     height: 100%;
+    max-height: 400px;
     width: 100%;
     background-color: #f0f0f0;
+}
+
+#rose-menu {
+    position: absolute;
+    top: 400px;
+    width: 100%;
 }
 
 #rose-diagram g {
