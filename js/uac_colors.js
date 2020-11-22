@@ -1,10 +1,4 @@
 class AvalancheDangerColor {
-    static get low() { return '#00c346' }
-    static get moderate() { return '#fcfc00' }
-    static get considerate() { return '#ff9100' }
-    static get high() { return '#cc332c' }
-    static get extreme() { return '#222222' }
-
     static colorForId(id) {
         try {
             return AvalancheDangerColor.ALL[id]
@@ -14,11 +8,16 @@ class AvalancheDangerColor {
     }
 }
 
+AvalancheDangerColor.LOW = '#00c346';
+AvalancheDangerColor.MODERATE = '#fcfc00';
+AvalancheDangerColor.CONSIDERATE = '#ff9100';
+AvalancheDangerColor.HIGH = '#cc332c';
+AvalancheDangerColor.EXTREME = '#222222';
 AvalancheDangerColor.ALL = [
     null,
-    AvalancheDangerColor.low,
-    AvalancheDangerColor.moderate,
-    AvalancheDangerColor.considerate,
-    AvalancheDangerColor.high,
-    AvalancheDangerColor.extreme,
+    AvalancheDangerColor.LOW,
+    AvalancheDangerColor.MODERATE,
+    AvalancheDangerColor.CONSIDERATE,
+    AvalancheDangerColor.HIGH,
+    AvalancheDangerColor.EXTREME,
 ]

@@ -55,11 +55,11 @@ class AreaMap {
 
     classToColor(value) {
         if (value[0] <= UACMapper.LOW_ELEVATION_IDS.max) {
-            return AvalancheDangerColor.low;
+            return AvalancheDangerColor.LOW;
         } else if (value[0] <= UACMapper.MID_ELEVATION_IDS.max) {
-            return AvalancheDangerColor.moderate;
+            return AvalancheDangerColor.MODERATE;
         } else {
-            return AvalancheDangerColor.considerate;
+            return AvalancheDangerColor.CONSIDERATE;
         }
     }
 
