@@ -70,6 +70,7 @@ class Rose {
             .on('click',  (e, d) => {
                 e.stopPropagation();
                 this.map.selection = undefined;
+                this.map.removeMarker();
                 this.menu.clear();
                 this.map.redraw();
             });
