@@ -18,6 +18,9 @@ class AreaMap {
     get forecast() { return this._forecast;}
     set forecast(values) { this._forecast = values; }
 
+    get selection() { return this._selection; }
+    set selection(value) { this._selection = value; }
+
     removeMarker() {
         if (this._currentMarker) this.currentMarker.remove();
     }
@@ -47,6 +50,7 @@ class AreaMap {
             {
                 attribution: MapData.attribution,
                 maxZoom: 17,
+                opacity: 0.7,
             }
         ).addTo(this.baseLayer);
 
@@ -59,9 +63,15 @@ class AreaMap {
     classToColor(value) {
         if (this.forecast === undefined) return;
 
-        return AvalancheDangerColor.colorForId(
+        let color = AvalancheDangerColor.colorForId(
             this.forecast[value[0]]
         );
+
+        if (this.selection !== undefined && this.selection !== value[0] ) {
+            color += '77';  // Set Alpha channel for color
+        }
+
+        return color
     }
 
     addLayer(layerData) {
@@ -70,7 +80,7 @@ class AreaMap {
          */
         this.dangerlayer = new window.GeoRasterLayer({
             georaster: layerData,
-            opacity: 0.4,
+            opacity: 0.6,
             pixelValuesToColorFn: values => {
                 return this.classToColor(values)
             },

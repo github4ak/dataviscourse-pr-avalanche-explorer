@@ -50,6 +50,11 @@ class Rose {
             })
             .on('mouseout', function () {
                 d3.select(this).classed('hover', false);
+            })
+            .on('click', (e, d) => {
+                e.stopPropagation();
+                this.map.selection = d.data;
+                this.map.redraw();
             });
     }
 
@@ -59,7 +64,12 @@ class Rose {
         this.svg = div.append("svg")
             .attr("id", "rose-diagram")
             .attr("width", "100%")
-            .attr("height", "100%");
+            .attr("height", "100%")
+            .on('click',  (e, d) => {
+                e.stopPropagation();
+                this.map.selection = undefined
+                this.map.redraw();
+            });
 
         // From inside out
         this.addElevationLevel(UACMapper.HIGH_ELEVATION_IDS.all, 1)
