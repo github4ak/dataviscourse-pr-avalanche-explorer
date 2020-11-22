@@ -9,19 +9,19 @@ class UACMapper {
         return this.ELEVATIONS;
     }
 }
-UACMapper.LOW_ELEVATION = 'Low Elevation';
+UACMapper.LOW_ELEVATION = 'Below 8,000 ft';
 UACMapper.LOW_ELEVATION_IDS = {
     min: 1,
     max: 8,
     all: d3.range(1, 9, 1),
 }
-UACMapper.MID_ELEVATION = 'Mid Elevation';
+UACMapper.MID_ELEVATION = '8,000-95000 ft';
 UACMapper.MID_ELEVATION_IDS = {
     min: 9,
     max: 16,
     all: d3.range(9, 17, 1),
 }
-UACMapper.HIGH_ELEVATION = 'High Elevation';
+UACMapper.HIGH_ELEVATION = 'Above 9,500 ft';
 UACMapper.HIGH_ELEVATION_IDS = {
     min: 17,
     max: 24,
@@ -30,8 +30,8 @@ UACMapper.HIGH_ELEVATION_IDS = {
 UACMapper.CLASSES = [
     {
         'ID': 0,
-        'Aspect': null,
-        'Elevation': null
+        'Aspect': 'All Aspects',
+        'Elevation': 'All Elevations',
     },
     {
         'ID': 1,

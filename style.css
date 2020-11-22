@@ -10,8 +10,15 @@
 #rose-view {
     position: absolute;
     height: 100%;
+    max-height: 400px;
     width: 100%;
     background-color: #f0f0f0;
+}
+
+#rose-menu {
+    position: absolute;
+    top: 400px;
+    width: 100%;
 }
 
 #rose-diagram g {
@@ -22,7 +29,11 @@
     stroke: #000000;
     stroke-width: 2px;
     stroke-opacity: 50%;
-    }
+}
+#rose-diagram .petal.hover {
+    stroke-width: 4px;
+    stroke-opacity: 100%;
+}
 
 #dropdown-view {
     position: absolute;
