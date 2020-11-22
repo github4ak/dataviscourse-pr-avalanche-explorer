@@ -15,6 +15,9 @@ class AreaMap {
     get currentMarker() { return this._currentMarker; }
     set currentMarker(marker) { this._currentMarker = marker; }
 
+    get forecast() { return this._forecast;}
+    set forecast(values) { this._forecast = values; }
+
     removeMarker() {
         if (this._currentMarker) this.currentMarker.remove();
     }
@@ -54,13 +57,11 @@ class AreaMap {
     }
 
     classToColor(value) {
-        if (value[0] <= UACMapper.LOW_ELEVATION_IDS.max) {
-            return AvalancheDangerColor.LOW;
-        } else if (value[0] <= UACMapper.MID_ELEVATION_IDS.max) {
-            return AvalancheDangerColor.MODERATE;
-        } else {
-            return AvalancheDangerColor.CONSIDERATE;
-        }
+        if (this.forecast === undefined) return;
+
+        return AvalancheDangerColor.colorForId(
+            this.forecast[value[0]]
+        );
     }
 
     addLayer(layerData) {

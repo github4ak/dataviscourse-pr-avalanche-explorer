@@ -22,8 +22,9 @@ class RoseData {
 RoseData.DATA_PREFIX = 'data/level';
 
 class Rose {
-    constructor(data) {
+    constructor(data, map) {
         this.data = RoseData.parse(data);
+        this.map = map;
     }
 
     levelArcs(level) {
@@ -60,9 +61,10 @@ class Rose {
             .attr("width", "100%")
             .attr("height", "100%");
 
-        this.addElevationLevel(UACMapper.LOW_ELEVATION_IDS.all, 1)
+        // From inside out
+        this.addElevationLevel(UACMapper.HIGH_ELEVATION_IDS.all, 1)
         this.addElevationLevel(UACMapper.MID_ELEVATION_IDS.all, 2)
-        this.addElevationLevel(UACMapper.HIGH_ELEVATION_IDS.all, 3)
+        this.addElevationLevel(UACMapper.LOW_ELEVATION_IDS.all, 3)
 
         let arc_length = 180;
 
@@ -86,6 +88,7 @@ class Rose {
         // TODO - Use given date
         const forecast = this.data.get('01-01-2020');
 
+        this.map.forecast = forecast;
         this.svg
             .selectAll('.petal')
             .attr("fill", (d) => {
