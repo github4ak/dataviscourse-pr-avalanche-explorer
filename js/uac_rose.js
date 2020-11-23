@@ -37,7 +37,13 @@ class Rose {
             .endAngle(d => { return d.endAngle - Rose.PETAL_OFFSET });
     }
 
+    petalInfoText(d) {
+        const petalInfo = UACMapper.byId[d.data];
+        return `${petalInfo.Aspect} - ${petalInfo.Elevation}`
+    }
+
     addElevationLevel(ids, level) {
+        let that = this;
         this.svg.append("g")
             .selectAll("path")
             .data(d3.pie().value(() => Rose.PETAL_ARC)(ids))
@@ -46,11 +52,15 @@ class Rose {
             .attr('fill', 'none')
             .classed('petal', true)
             .attr("d", this.levelArcs(level))
-            .on('mouseover', function () {
+            .on('mouseover', function (_e, d) {
                 d3.select(this).classed('hover', true).raise();
+                that.toolTip
+                    .classed('hidden', false)
+                    .html(that.petalInfoText(d))
             })
             .on('mouseout', function () {
                 d3.select(this).classed('hover', false);
+                that.toolTip.text('').classed('hidden', true);
             })
             .on('click', (e, d) => {
                 e.stopPropagation();
@@ -96,6 +106,10 @@ class Rose {
                 return arc_length * y_text_location[i];
             })
             .text((d) => d);
+
+        this.toolTip = div
+            .append('span')
+            .attr("class", "petal-info hidden");
 
         this.menu.addOptions();
     }

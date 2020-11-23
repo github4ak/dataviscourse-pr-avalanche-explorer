@@ -35,6 +35,23 @@
     stroke-opacity: 100%;
 }
 
+#rose-view span.petal-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    text-align: center;
+    padding: .1em 0.6em;
+    border: 2px solid gray;
+    background-color: white;
+    border-radius: 8px;
+    z-index: 100;
+}
+
+#rose-view span.petal-info.hidden {
+    opacity: 0;
+}
+
 #dropdown-view {
     position: absolute;
     width: 500px;
