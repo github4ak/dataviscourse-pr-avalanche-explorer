@@ -15,7 +15,7 @@ UACMapper.LOW_ELEVATION_IDS = {
     max: 8,
     all: d3.range(1, 9, 1),
 }
-UACMapper.MID_ELEVATION = '8,000-9,500 ft';
+UACMapper.MID_ELEVATION = '8,000 - 9,500 ft';
 UACMapper.MID_ELEVATION_IDS = {
     min: 9,
     max: 16,
