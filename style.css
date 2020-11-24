@@ -35,6 +35,35 @@
     stroke-opacity: 100%;
 }
 
+span#petal-info,
+span#date-info {
+    position: absolute;
+    left: 0;
+    display: block;
+    text-align: center;
+    padding: .1em 0.6em;
+    border: 2px solid gray;
+    background-color: white;
+    border-radius: 8px;
+    z-index: 1000;
+}
+
+span#petal-info {
+    top: 0;
+}
+
+span#petal-info.hidden {
+    opacity: 0;
+}
+
+span#date-info {
+    bottom: 0;
+    margin-left: 15px;
+    padding: .3em 1em;
+    border: 3px solid darkslategray;
+    font-size: 1.1em;
+}
+
 #dropdown-view {
     position: absolute;
     width: 500px;

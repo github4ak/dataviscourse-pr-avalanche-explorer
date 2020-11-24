@@ -37,7 +37,30 @@ class Rose {
             .endAngle(d => { return d.endAngle - Rose.PETAL_OFFSET });
     }
 
+    petalInfoText(d) {
+        const petalInfo = UACMapper.byId[d.data];
+        return `${petalInfo.Aspect} - ${petalInfo.Elevation}`
+    }
+
+    highlightPetal(petal, d, force = false) {
+        if (this.map.selection === undefined || force) {
+            this.clearHighlightPetal(force);
+            d3.select(petal).classed('hover', true).raise();
+            this.toolTip
+                .classed('hidden', false)
+                .html(this.petalInfoText(d));
+        }
+    }
+
+    clearHighlightPetal(force = false) {
+        if (this.map.selection === undefined || force) {
+            this.svg.selectAll('.petal.hover').classed('hover', false);
+            this.toolTip.text('').classed('hidden', true);
+        }
+    }
+
     addElevationLevel(ids, level) {
+        let that = this;
         this.svg.append("g")
             .selectAll("path")
             .data(d3.pie().value(() => Rose.PETAL_ARC)(ids))
@@ -46,17 +69,16 @@ class Rose {
             .attr('fill', 'none')
             .classed('petal', true)
             .attr("d", this.levelArcs(level))
-            .on('mouseover', function () {
-                d3.select(this).classed('hover', true).raise();
+            .on('mouseover', function (_e, d) {
+                that.highlightPetal(this, d);
             })
-            .on('mouseout', function () {
-                d3.select(this).classed('hover', false);
-            })
+            .on('mouseout', () => this.clearHighlightPetal())
             .on('click', (e, d) => {
                 e.stopPropagation();
                 this.map.selection = [d.data];
                 this.map.redraw();
                 this.menu.clear();
+                this.highlightPetal(e.currentTarget, d, true);
             });
     }
 
@@ -67,13 +89,24 @@ class Rose {
             .attr("id", "rose-diagram")
             .attr("width", "100%")
             .attr("height", "100%")
-            .on('click',  (e, d) => {
+            .on('mouseover', () => {
+                if (this.map.selection !== undefined) {
+                    this.svgHelperText.text('CLick to clear selection');
+                } else {
+                    this.svgHelperText.text('');
+                }
+            })
+            .on('click',  (e) => {
                 e.stopPropagation();
                 this.map.selection = undefined;
                 this.map.removeMarker();
                 this.menu.clear();
                 this.map.redraw();
+                this.clearHighlightPetal(true);
             });
+
+        this.svgHelperText = this.svg.append('svg:title')
+            .classed('clear-selection', true);
 
         // From inside out
         this.addElevationLevel(UACMapper.HIGH_ELEVATION_IDS.all, 1)
@@ -97,13 +130,20 @@ class Rose {
             })
             .text((d) => d);
 
+        this.toolTip = div
+            .append('span')
+            .attr("id", "petal-info")
+            .classed('hidden', true);
+
         this.menu.addOptions();
     }
 
     showForecast(date = null) {
         // TODO - Use given date
-        const forecast = this.data.get('01-01-2020');
+        date = date || '01-01-2020'
+        const forecast = this.data.get(date);
 
+        this.map.infoBox.text(date);
         this.map.forecast = forecast;
         this.svg
             .selectAll('.petal')
