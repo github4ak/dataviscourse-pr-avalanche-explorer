@@ -77,7 +77,7 @@ class Rose {
             .attr("id", "rose-diagram")
             .attr("width", "100%")
             .attr("height", "100%")
-            .on('click',  (e, d) => {
+            .on('click',  (e) => {
                 e.stopPropagation();
                 this.map.selection = undefined;
                 this.map.removeMarker();
