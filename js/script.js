@@ -1,8 +1,8 @@
-d3.json('data/january_2020.json').then(data => {
-    const currentMap = new AreaMap();
-    currentMap.load();
+const currentMap = new AreaMap();
+currentMap.load();
 
-    window.avalancheRose = new Rose(data, currentMap);
-    avalancheRose.draw();
-    avalancheRose.showForecast();
-});
+const avalancheRose = new Rose(currentMap);
+avalancheRose.draw();
+
+window.currentCalendar = new Calendar(avalancheRose, currentMap);
+window.currentCalendar.show();

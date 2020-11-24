@@ -15,8 +15,13 @@ class UACForecasts {
         return d3.rollup(
             data,
             v => UACForecasts.parseLevel(v[0]),
-            d => d.date
+            d => new Date(d.date).toJSON(),
         )
+    }
+
+    static load() {
+        return d3.json('data/january_2020.json')
+            .then(data => UACForecasts.parse(data));
     }
 }
 

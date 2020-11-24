@@ -1,6 +1,5 @@
 class Rose {
-    constructor(data, map) {
-        this.data = UACForecasts.parse(data);
+    constructor(map) {
         this.map = map;
         this.menu = new RoseMenu(this);
     }
@@ -109,13 +108,7 @@ class Rose {
         this.menu.addOptions();
     }
 
-    showForecast(date = null) {
-        // TODO - Use given date
-        date = date || '01-01-2020'
-        const forecast = this.data.get(date);
-
-        this.map.infoBox.text(date);
-        this.map.forecast = forecast;
+    showForecast(forecast) {
         this.svg
             .selectAll('.petal')
             .attr("fill", (d) => {
