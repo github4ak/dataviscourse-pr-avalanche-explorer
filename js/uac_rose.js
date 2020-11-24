@@ -89,6 +89,13 @@ class Rose {
             .attr("id", "rose-diagram")
             .attr("width", "100%")
             .attr("height", "100%")
+            .on('mouseover', () => {
+                if (this.map.selection !== undefined) {
+                    this.svgHelperText.text('CLick to clear selection');
+                } else {
+                    this.svgHelperText.text('');
+                }
+            })
             .on('click',  (e) => {
                 e.stopPropagation();
                 this.map.selection = undefined;
@@ -97,6 +104,9 @@ class Rose {
                 this.map.redraw();
                 this.clearHighlightPetal(true);
             });
+
+        this.svgHelperText = this.svg.append('svg:title')
+            .classed('clear-selection', true);
 
         // From inside out
         this.addElevationLevel(UACMapper.HIGH_ELEVATION_IDS.all, 1)
