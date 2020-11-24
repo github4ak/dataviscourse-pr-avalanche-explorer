@@ -75,3 +75,32 @@ span#date-info {
     width: 500px;
     height: 500px;
 }
+
+#calendar-view {
+    width: 100%;
+    min-width: 270px;
+    height: 270px;
+    padding-left: .5em;
+}
+
+#calendar-view g {
+    position: absolute;
+}
+
+#calendar-view .calendar-day-box {
+    fill: white;
+    stroke-width: 2px;
+    stroke: darkslategray;
+}
+
+#calendar-view .calendar-day-box.selected {
+    stroke-width: 3px;
+    stroke: darkviolet;
+}
+
+#calendar-view .calendar-day-text {
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-size: 1.2em;
+    letter-spacing: .05em;
+}
