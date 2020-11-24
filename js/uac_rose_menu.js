@@ -44,5 +44,12 @@ class RoseMenu {
             menu.options[menu.selectedIndex].value
         ).map(a => a.ID);
         this.rose.map.redraw();
+        this.rose.clearHighlightPetal(true);
+        this.rose.svg.selectAll('.petal')
+            .filter((d) => {
+                return this.rose.map.selection.includes(d.data);
+            })
+            .classed('hover', true)
+            .raise();
     }
 }

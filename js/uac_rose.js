@@ -42,6 +42,23 @@ class Rose {
         return `${petalInfo.Aspect} - ${petalInfo.Elevation}`
     }
 
+    highlightPetal(petal, d, force = false) {
+        if (this.map.selection === undefined || force) {
+            this.clearHighlightPetal(force);
+            d3.select(petal).classed('hover', true).raise();
+            this.toolTip
+                .classed('hidden', false)
+                .html(this.petalInfoText(d));
+        }
+    }
+
+    clearHighlightPetal(force = false) {
+        if (this.map.selection === undefined || force) {
+            this.svg.selectAll('.petal.hover').classed('hover', false);
+            this.toolTip.text('').classed('hidden', true);
+        }
+    }
+
     addElevationLevel(ids, level) {
         let that = this;
         this.svg.append("g")
@@ -53,20 +70,15 @@ class Rose {
             .classed('petal', true)
             .attr("d", this.levelArcs(level))
             .on('mouseover', function (_e, d) {
-                d3.select(this).classed('hover', true).raise();
-                that.toolTip
-                    .classed('hidden', false)
-                    .html(that.petalInfoText(d))
+                that.highlightPetal(this, d);
             })
-            .on('mouseout', function () {
-                d3.select(this).classed('hover', false);
-                that.toolTip.text('').classed('hidden', true);
-            })
+            .on('mouseout', () => this.clearHighlightPetal())
             .on('click', (e, d) => {
                 e.stopPropagation();
                 this.map.selection = [d.data];
                 this.map.redraw();
                 this.menu.clear();
+                this.highlightPetal(e.currentTarget, d, true);
             });
     }
 
@@ -83,6 +95,7 @@ class Rose {
                 this.map.removeMarker();
                 this.menu.clear();
                 this.map.redraw();
+                this.clearHighlightPetal(true);
             });
 
         // From inside out
