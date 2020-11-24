@@ -1,4 +1,3 @@
-
 d3.json('data/january_2020.json').then(data => {
     const currentMap = new AreaMap();
     currentMap.load();
