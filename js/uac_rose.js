@@ -113,22 +113,16 @@ class Rose {
         this.addElevationLevel(UACMapper.MID_ELEVATION_IDS.all, 2)
         this.addElevationLevel(UACMapper.LOW_ELEVATION_IDS.all, 3)
 
-        let arc_length = 180;
-
-        let x_text_location = [0, 1 / Math.SQRT2, 1, 1 / Math.SQRT2, 0, -(1 / Math.SQRT2), -1, -(1 / Math.SQRT2)]
-        let y_text_location = [-1, -(1 / Math.SQRT2), 0, 1 / Math.SQRT2, 1, 1 / Math.SQRT2, 0, -(1 / Math.SQRT2)]
-
+        const textPositions = this.levelArcs(4);
         this.svg.append("g").selectAll("path")
-            .data(Rose.DIRECTIONS)
+            .data(
+                d3.pie().value(() => Rose.PETAL_ARC)(Rose.DIRECTIONS)
+            )
             .enter()
             .append("text")
-            .attr("x", function (d, i) {
-                return arc_length * x_text_location[i];
-            })
-            .attr("y", function (d, i) {
-                return arc_length * y_text_location[i];
-            })
-            .text((d) => d);
+            .attr("transform", d => `translate(${textPositions.centroid(d)})`)
+            .attr('class', 'petal-label')
+            .text((d) => d.data);
 
         this.toolTip = div
             .append('span')

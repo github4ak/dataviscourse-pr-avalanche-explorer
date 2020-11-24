@@ -35,6 +35,12 @@
     stroke-opacity: 100%;
 }
 
+#rose-diagram .petal-label {
+    text-anchor: middle;
+    letter-spacing: .1rem;
+    font-weight: 600;
+}
+
 span#petal-info,
 span#date-info {
     position: absolute;
