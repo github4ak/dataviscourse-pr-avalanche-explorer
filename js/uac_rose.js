@@ -132,15 +132,18 @@ class Rose {
 
         this.toolTip = div
             .append('span')
-            .attr("class", "petal-info hidden");
+            .attr("id", "petal-info")
+            .classed('hidden', true);
 
         this.menu.addOptions();
     }
 
     showForecast(date = null) {
         // TODO - Use given date
-        const forecast = this.data.get('01-01-2020');
+        date = date || '01-01-2020'
+        const forecast = this.data.get(date);
 
+        this.map.infoBox.text(date);
         this.map.forecast = forecast;
         this.svg
             .selectAll('.petal')

@@ -58,6 +58,8 @@ class AreaMap {
         this.baseLayer.on('click', function () {
             that.removeMarker();
         })
+
+        this.infoBox = d3.select(`#date-info`);
     }
 
     classToColor(value) {

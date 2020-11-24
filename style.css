@@ -35,9 +35,9 @@
     stroke-opacity: 100%;
 }
 
-#rose-view span.petal-info {
+span#petal-info,
+span#date-info {
     position: absolute;
-    top: 0;
     left: 0;
     display: block;
     text-align: center;
@@ -45,11 +45,23 @@
     border: 2px solid gray;
     background-color: white;
     border-radius: 8px;
-    z-index: 100;
+    z-index: 1000;
 }
 
-#rose-view span.petal-info.hidden {
+span#petal-info {
+    top: 0;
+}
+
+span#petal-info.hidden {
     opacity: 0;
+}
+
+span#date-info {
+    bottom: 0;
+    margin-left: 15px;
+    padding: .3em 1em;
+    border: 3px solid darkslategray;
+    font-size: 1.1em;
 }
 
 #dropdown-view {
