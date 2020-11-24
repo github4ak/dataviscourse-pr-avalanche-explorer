@@ -54,9 +54,8 @@ class AreaMap {
             }
         ).addTo(this.baseLayer);
 
-        const that = this;
-        this.baseLayer.on('click', function () {
-            that.removeMarker();
+        this.baseLayer.on('click', () => {
+            this.removeMarker();
         })
 
         this.infoBox = d3.select(`#date-info`);
