@@ -140,7 +140,7 @@ UACMapper.CLASSES = [
     },
     {
         'ID': 22,
-        'Aspect': 'SE',
+        'Aspect': 'SW',
         'Elevation': UACMapper.HIGH_ELEVATION
     },
     {
