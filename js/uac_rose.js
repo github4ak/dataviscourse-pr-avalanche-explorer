@@ -46,6 +46,7 @@ class Rose {
             .classed('petal', true)
             .attr("d", this.levelArcs(level))
             .on('mouseover', function (_e, d) {
+                that.svgHelperText.text('');
                 that.highlightPetal(this, d);
             })
             .on('mouseout', () => this.clearHighlightPetal())
@@ -65,15 +66,18 @@ class Rose {
             .attr("id", "rose-diagram")
             .attr("width", "100%")
             .attr("height", "100%")
-            .on('mouseover', () => {
-                if (this.map.selection !== undefined) {
-                    this.svgHelperText.text('CLick to clear selection');
-                } else {
-                    this.svgHelperText.text('');
+            .on('mouseover', (e) => {
+                if (e.target === this.svg.node()) {
+                    if (this.map.selection !== undefined) {
+                        this.svgHelperText.text('CLick to clear selection');
+                    } else {
+                        this.svgHelperText.text('');
+                    }
                 }
             })
             .on('click',  (e) => {
                 e.stopPropagation();
+                if (this.map.selection === undefined) return;
                 this.map.selection = undefined;
                 this.menu.clear();
                 this.map.redraw();
