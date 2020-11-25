@@ -1,29 +1,5 @@
-class RoseData {
-    static parseLevel(levelData) {
-        let data = {};
-        let level = 1;
-        for (let i = 0; i < 24; i++) {
-            if (i === 8 || level === 16) level++;
-            data[i + 1] = levelData[
-                    `${RoseData.DATA_PREFIX}-${level}/${Rose.DIRECTIONS[i % 8]}`
-                ];
-        }
-        return data;
-    }
-
-    static parse(data) {
-        return d3.rollup(
-            data,
-            v => RoseData.parseLevel(v[0]),
-            d => d.date
-        )
-    }
-}
-RoseData.DATA_PREFIX = 'data/level';
-
 class Rose {
-    constructor(data, map) {
-        this.data = RoseData.parse(data);
+    constructor(map) {
         this.map = map;
         this.menu = new RoseMenu(this);
     }
@@ -70,6 +46,7 @@ class Rose {
             .classed('petal', true)
             .attr("d", this.levelArcs(level))
             .on('mouseover', function (_e, d) {
+                that.svgHelperText.text('');
                 that.highlightPetal(this, d);
             })
             .on('mouseout', () => this.clearHighlightPetal())
@@ -89,17 +66,19 @@ class Rose {
             .attr("id", "rose-diagram")
             .attr("width", "100%")
             .attr("height", "100%")
-            .on('mouseover', () => {
-                if (this.map.selection !== undefined) {
-                    this.svgHelperText.text('CLick to clear selection');
-                } else {
-                    this.svgHelperText.text('');
+            .on('mouseover', (e) => {
+                if (e.target === this.svg.node()) {
+                    if (this.map.selection !== undefined) {
+                        this.svgHelperText.text('CLick to clear selection');
+                    } else {
+                        this.svgHelperText.text('');
+                    }
                 }
             })
             .on('click',  (e) => {
                 e.stopPropagation();
+                if (this.map.selection === undefined) return;
                 this.map.selection = undefined;
-                this.map.removeMarker();
                 this.menu.clear();
                 this.map.redraw();
                 this.clearHighlightPetal(true);
@@ -132,13 +111,9 @@ class Rose {
         this.menu.addOptions();
     }
 
-    showForecast(date = null) {
-        // TODO - Use given date
-        date = date || '01-01-2020'
-        const forecast = this.data.get(date);
-
-        this.map.infoBox.text(date);
-        this.map.forecast = forecast;
+    showForecast(forecast) {
+        this.clearHighlightPetal(true);
+        this.menu.clear();
         this.svg
             .selectAll('.petal')
             .attr("fill", (d) => {

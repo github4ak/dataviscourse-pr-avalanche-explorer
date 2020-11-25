@@ -42,10 +42,13 @@ class AreaMap {
         return this.raster.values[1];
     }
 
-    constructor() {
+    addBaseLayer() {
         this.baseLayer = L.map("map-area").setView(
             MapData.centerCoords, MapData.zoomLevel
-        );
+        ).on('click', () => {
+            this.removeMarker();
+        });
+
         L.tileLayer('https://a.tile.opentopomap.org/{z}/{x}/{y}.png',
             {
                 attribution: MapData.attribution,
@@ -53,12 +56,19 @@ class AreaMap {
                 opacity: 0.7,
             }
         ).addTo(this.baseLayer);
+    }
 
-        this.baseLayer.on('click', () => {
-            this.removeMarker();
-        })
-
+    constructor() {
+        this.addBaseLayer();
         this.infoBox = d3.select(`#date-info`);
+
+        return fetch(MapData.uacClasses)
+            .then(response => response.arrayBuffer())
+            .then(window.parseGeoraster)
+            .then((goeRaster) => {
+                this.addLayer(goeRaster);
+                return this;
+            });
     }
 
     classToColor(value) {
@@ -112,6 +122,7 @@ class AreaMap {
     }
 
     redraw() {
+        this.removeMarker();
         this.dangerlayer.redraw();
     }
 
@@ -145,11 +156,10 @@ class AreaMap {
         }
     }
 
-    load() {
-        let that = this;
-        fetch(MapData.uacClasses)
-            .then(response => response.arrayBuffer())
-            .then(window.parseGeoraster)
-            .then(goeRaster => that.addLayer(goeRaster));
+    showForecast(forecast, date) {
+        this.selection = undefined;
+        this.infoBox.text(date.toLocaleDateString());
+        this.forecast = forecast;
+        this.redraw();
     }
 }
