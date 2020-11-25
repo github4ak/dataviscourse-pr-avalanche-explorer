@@ -20,9 +20,15 @@ class Calendar {
     }
 
     addDays(date) {
+        let days = [...this.data.keys()].map((k) => {
+            return new Date(k)
+        });
+        // Start the week on a Monday
+        const dayPad = new Array(days[0].getDay() - 1).fill(null);
+
         this.days = this.svg
             .selectAll("g")
-            .data(this.data.keys())
+            .data([...dayPad, ...days])
             .join('g')
             .attr('transform', (_d, i) => {
                 const x = i % 7 * Calendar.CELL_SIZE + 3;
@@ -30,21 +36,21 @@ class Calendar {
                 return `translate(${x},${y})`
             });
 
-        const dateJSON = date.toJSON();
         this.days
             .append('rect')
             .attr("width", Calendar.CELL_DIM)
             .attr("height", Calendar.CELL_DIM)
             .attr('rx', 4)
             .attr("class", 'calendar-day-box')
-            .classed('selected', (d) => d === dateJSON);
+            .classed('selected', (d) => d && d.getTime() === date.getTime())
+            .classed('empty', (d) => d === null);
 
         this.days
             .append("text")
             .attr("x", Calendar.CELL_DIM/2)
             .attr("y", Calendar.CELL_DIM/2)
             .attr("class", 'calendar-day-text')
-            .text((d) => new Date(d).getDate())
+            .text((d) => d ? d.getDate() : d)
     }
 
     selectDate(date) {
