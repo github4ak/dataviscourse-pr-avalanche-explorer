@@ -1,4 +1,4 @@
-new AreaMap().load().then(function(map) {
+new AreaMap().then(function(map) {
     const avalancheRose = new Rose(map);
     avalancheRose.draw();
 
