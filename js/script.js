@@ -1,8 +1,7 @@
-const currentMap = new AreaMap();
-currentMap.load();
+new AreaMap().load().then(function(map) {
+    const avalancheRose = new Rose(map);
+    avalancheRose.draw();
 
-const avalancheRose = new Rose(currentMap);
-avalancheRose.draw();
-
-window.currentCalendar = new Calendar(avalancheRose, currentMap);
-window.currentCalendar.show();
+    window.currentCalendar = new Calendar(avalancheRose, map);
+    window.currentCalendar.show();
+});

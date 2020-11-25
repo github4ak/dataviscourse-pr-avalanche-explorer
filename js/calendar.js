@@ -37,26 +37,32 @@ class Calendar {
             });
 
         this.days
+            .append("text")
+            .attr("x", Calendar.CELL_DIM/2)
+            .attr("y", Calendar.CELL_DIM/2)
+            .attr("class", 'calendar-day-text')
+            .text((d) => d ? d.getDate() : d)
+
+        let that = this;
+        this.days
             .append('rect')
             .attr("width", Calendar.CELL_DIM)
             .attr("height", Calendar.CELL_DIM)
             .attr('rx', 4)
             .attr("class", 'calendar-day-box')
             .classed('selected', (d) => d && d.getTime() === date.getTime())
-            .classed('empty', (d) => d === null);
-
-        this.days
-            .append("text")
-            .attr("x", Calendar.CELL_DIM/2)
-            .attr("y", Calendar.CELL_DIM/2)
-            .attr("class", 'calendar-day-text')
-            .text((d) => d ? d.getDate() : d)
+            .classed('empty', (d) => d === null)
+            .on('click',function(e, d) {
+                e.stopPropagation();
+                that.selectDate(d);
+                that.days.selectAll('rect').classed('selected', false);
+                d3.select(this).classed('selected', true);
+            });
     }
 
     selectDate(date) {
         const forecast = this.data.get(date.toJSON());
-        this.map.forecast = forecast;
-        this.map.infoBox.text(date.toLocaleDateString());
+        this.map.showForecast(forecast, date);
         this.rose.showForecast(forecast);
     }
 }

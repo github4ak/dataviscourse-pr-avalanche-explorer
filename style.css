@@ -88,7 +88,7 @@ span#date-info {
 }
 
 #calendar-view .calendar-day-box {
-    fill: white;
+    fill: transparent;
     stroke-width: 2px;
     stroke: darkslategray;
 }

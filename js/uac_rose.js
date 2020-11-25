@@ -75,7 +75,6 @@ class Rose {
             .on('click',  (e) => {
                 e.stopPropagation();
                 this.map.selection = undefined;
-                this.map.removeMarker();
                 this.menu.clear();
                 this.map.redraw();
                 this.clearHighlightPetal(true);
@@ -109,6 +108,8 @@ class Rose {
     }
 
     showForecast(forecast) {
+        this.clearHighlightPetal(true);
+        this.menu.clear();
         this.svg
             .selectAll('.petal')
             .attr("fill", (d) => {

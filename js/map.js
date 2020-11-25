@@ -112,6 +112,7 @@ class AreaMap {
     }
 
     redraw() {
+        this.removeMarker();
         this.dangerlayer.redraw();
     }
 
@@ -145,11 +146,20 @@ class AreaMap {
         }
     }
 
+    showForecast(forecast, date) {
+        this.selection = undefined;
+        this.infoBox.text(date.toLocaleDateString());
+        this.forecast = forecast;
+        this.redraw();
+    }
+
     load() {
-        let that = this;
-        fetch(MapData.uacClasses)
+        return fetch(MapData.uacClasses)
             .then(response => response.arrayBuffer())
             .then(window.parseGeoraster)
-            .then(goeRaster => that.addLayer(goeRaster));
+            .then((goeRaster) => {
+                    this.addLayer(goeRaster);
+                    return this;
+            });
     }
 }
