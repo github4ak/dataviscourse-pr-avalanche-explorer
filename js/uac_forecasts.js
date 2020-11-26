@@ -25,7 +25,7 @@ class UACForecasts {
         return d3.rollup(
             data,
             v => UACForecasts.parseLevel(v[0]),
-            d => new Date(d.date).toJSON(),
+            d => new Date(d.date.replace(/-/g, '/')).toJSON(),
         )
     }
 

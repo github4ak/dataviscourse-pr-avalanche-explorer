@@ -7,7 +7,7 @@ class Calendar {
     show() {
         UACForecasts.load().then((data) => {
             this.data = data;
-            const date = new Date('01-01-2020');
+            const date = new Date('01/01/2020');
             this.selectDate(date);
             this.addDays(date);
         });
