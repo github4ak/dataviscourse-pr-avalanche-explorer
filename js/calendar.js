@@ -22,9 +22,9 @@ class Calendar {
     dayRectCss(d) {
         let cssClass = 'calendar-day-box';
         if (d === null) return cssClass;
-        const forecasts = Object.values(this.data.get(d.toJSON()));
-        const max = AvalancheDangerColor.LEVELS[Math.max(...forecasts)];
-        const min = AvalancheDangerColor.LEVELS[Math.min(...forecasts)];
+        const forecasts = this.data.get(d.toJSON());
+        const max = AvalancheDangerColor.LEVELS[forecasts.max];
+        const min = AvalancheDangerColor.LEVELS[forecasts.min];
         return `${cssClass} bg-uac-${max}-${min}`
     }
 
@@ -72,7 +72,7 @@ class Calendar {
     }
 
     selectDate(date) {
-        const forecast = this.data.get(date.toJSON());
+        const forecast = this.data.get(date.toJSON()).values;
         this.map.showForecast(forecast, date);
         this.rose.showForecast(forecast);
     }
