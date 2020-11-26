@@ -29,6 +29,7 @@
     stroke: #000000;
     stroke-width: 2px;
     stroke-opacity: 50%;
+    cursor: pointer;
 }
 #rose-diagram .petal.hover {
     stroke-width: 4px;

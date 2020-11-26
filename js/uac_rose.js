@@ -25,13 +25,17 @@ class Rose {
             d3.select(petal).classed('hover', true).raise();
             d3.selectAll('.petal:not(.hover)').classed('opaque', true);
             this.roseInfo.html(this.petalInfoText(d));
+        } else if (petal) {
+            d3.select(petal).classed('hover', true).raise();
         }
     }
 
     clearHighlightPetal(force = false) {
         if (this.map.selection === undefined || force) {
-            this.svg.selectAll('.petal').classed('hover', false).classed('opaque', false);
+            this.svg.selectAll('.petal').attr('class', 'petal');
             this.roseInfo.html('');
+        } else {
+            d3.select('.hover.opaque').classed('hover', false);
         }
     }
 
