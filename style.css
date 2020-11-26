@@ -35,6 +35,10 @@
     stroke-opacity: 100%;
 }
 
+#rose-diagram .petal.opaque {
+    opacity: 25%;
+}
+
 #rose-diagram .petal-label {
     text-anchor: middle;
     letter-spacing: .1rem;

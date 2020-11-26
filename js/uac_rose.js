@@ -19,9 +19,16 @@ class Rose {
     }
 
     highlightPetal(petal, d, force = false) {
+        
         if (this.map.selection === undefined || force) {
             this.clearHighlightPetal(force);
             d3.select(petal).classed('hover', true).raise();
+            console.log(d3.select(petal.parentNode.parentNode))
+            d3.select(petal.parentNode.parentNode).selectAll('path').each(function(){
+               if(d3.select(this).attr("class") != "petal hover"){
+                    d3.select(this).classed('opaque', true);
+               }
+            })
             this.toolTip
                 .classed('hidden', false)
                 .html(this.petalInfoText(d));
@@ -30,7 +37,7 @@ class Rose {
 
     clearHighlightPetal(force = false) {
         if (this.map.selection === undefined || force) {
-            this.svg.selectAll('.petal.hover').classed('hover', false);
+            this.svg.selectAll('.petal').classed('hover', false).classed('opaque', false);
             this.toolTip.text('').classed('hidden', true);
         }
     }
