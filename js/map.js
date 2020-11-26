@@ -125,7 +125,6 @@ class AreaMap {
     }
 
     redraw() {
-        this.removeMarker();
         this.dangerlayer.redraw();
     }
 

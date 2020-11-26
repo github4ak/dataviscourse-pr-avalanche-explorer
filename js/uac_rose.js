@@ -82,6 +82,7 @@ class Rose {
                 e.stopPropagation();
                 if (this.map.selection === undefined) return;
                 this.map.selection = undefined;
+                this.map.removeMarker();
                 this.menu.clear();
                 this.clearHighlightPetal(true);
             });
