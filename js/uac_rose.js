@@ -23,11 +23,7 @@ class Rose {
         if (this.map.selection === undefined || force) {
             this.clearHighlightPetal(force);
             d3.select(petal).classed('hover', true).raise();
-            d3.select(petal.parentNode.parentNode).selectAll('path').each(function(){
-               if(d3.select(this).attr("class") != "petal hover"){
-                    d3.select(this).classed('opaque', true);
-               }
-            })
+            d3.selectAll('.petal:not(.hover)').classed('opaque', true);
             this.roseInfo.html(this.petalInfoText(d));
         }
     }
