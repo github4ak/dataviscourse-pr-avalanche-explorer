@@ -57,7 +57,6 @@ class Rose {
             .on('click', (e, d) => {
                 e.stopPropagation();
                 this.map.selection = [d.data];
-                this.map.redraw();
                 this.menu.clear();
                 this.highlightPetal(e.currentTarget, d, true);
             });
@@ -84,7 +83,6 @@ class Rose {
                 if (this.map.selection === undefined) return;
                 this.map.selection = undefined;
                 this.menu.clear();
-                this.map.redraw();
                 this.clearHighlightPetal(true);
             });
 

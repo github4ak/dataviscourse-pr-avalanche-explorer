@@ -19,7 +19,10 @@ class AreaMap {
     set forecast(values) { this._forecast = values; }
 
     get selection() { return this._selection; }
-    set selection(value) { this._selection = value; }
+    set selection(value) {
+        this._selection = value;
+        this.redraw();
+    }
 
     removeMarker() {
         if (this._currentMarker) this.currentMarker.remove();
