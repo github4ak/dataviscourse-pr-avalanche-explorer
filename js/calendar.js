@@ -19,12 +19,22 @@ class Calendar {
             .attr("height", "100%");
     }
 
+    dayRectCss(d) {
+        let cssClass = 'calendar-day-box';
+        if (d === null) return cssClass;
+        const forecasts = Object.values(this.data.get(d.toJSON()));
+        const max = AvalancheDangerColor.LEVELS[Math.max(...forecasts)];
+        const min = AvalancheDangerColor.LEVELS[Math.min(...forecasts)];
+        return `${cssClass} bg-uac-${max}-${min}`
+    }
+
     addDays(date) {
         let days = [...this.data.keys()].map((k) => {
             return new Date(k)
         });
         // Start the week on a Monday
         const dayPad = new Array(days[0].getDay() - 1).fill(null);
+        AvalancheDangerColor.addGradients(this.svg);
 
         this.days = this.svg
             .selectAll("g")
@@ -36,28 +46,29 @@ class Calendar {
                 return `translate(${x},${y})`
             });
 
-        this.days
-            .append("text")
-            .attr("x", Calendar.CELL_DIM/2)
-            .attr("y", Calendar.CELL_DIM/2)
-            .attr("class", 'calendar-day-text')
-            .text((d) => d ? d.getDate() : d)
-
         let that = this;
         this.days
             .append('rect')
             .attr("width", Calendar.CELL_DIM)
             .attr("height", Calendar.CELL_DIM)
             .attr('rx', 4)
-            .attr("class", 'calendar-day-box')
+            .attr("class", (d) => this.dayRectCss(d))
             .classed('selected', (d) => d && d.getTime() === date.getTime())
             .classed('empty', (d) => d === null)
-            .on('click',function(e, d) {
+            .on('click', function(e, d) {
                 e.stopPropagation();
                 that.selectDate(d);
                 that.days.selectAll('rect').classed('selected', false);
                 d3.select(this).classed('selected', true);
             });
+
+        this.days
+            .append("text")
+            .attr("x", Calendar.CELL_DIM/2)
+            .attr("y", Calendar.CELL_DIM/2)
+            .attr("class", 'calendar-day-text')
+            .text((d) => d ? d.getDate() : d)
+            .on('click', () => { return true });
     }
 
     selectDate(date) {
