@@ -50,5 +50,6 @@ class RoseMenu {
             })
             .classed('hover', true)
             .raise();
+        d3.selectAll('.petal:not(.hover)').classed('opaque', true);
     }
 }
