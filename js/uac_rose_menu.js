@@ -43,7 +43,6 @@ class RoseMenu {
         this.rose.map.selection = data.get(
             menu.options[menu.selectedIndex].value
         ).map(a => a.ID);
-        this.rose.map.redraw();
         this.rose.clearHighlightPetal(true);
         this.rose.svg.selectAll('.petal')
             .filter((d) => {

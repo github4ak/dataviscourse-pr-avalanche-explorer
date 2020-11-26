@@ -29,6 +29,7 @@
     stroke: #000000;
     stroke-width: 2px;
     stroke-opacity: 50%;
+    cursor: pointer;
 }
 #rose-diagram .petal.hover {
     stroke-width: 4px;
@@ -46,7 +47,7 @@
 }
 
 span#petal-info,
-span#date-info {
+span#map-info {
     position: absolute;
     left: 0;
     display: block;
@@ -66,12 +67,23 @@ span#petal-info.hidden {
     opacity: 0;
 }
 
-span#date-info {
+span#map-info {
     bottom: 0;
     margin-left: 15px;
     padding: .3em 1em;
     border: 3px solid darkslategray;
     font-size: 1.1em;
+    text-align: left;
+}
+
+span#map-info i {
+    font-weight: 600;
+    display: block;
+}
+
+span#map-info > span {
+    display: block;
+    float: none;
 }
 
 #dropdown-view {
@@ -92,9 +104,10 @@ span#date-info {
 }
 
 #calendar-view .calendar-day-box {
-    fill: transparent;
     stroke-width: 2px;
     stroke: darkslategray;
+    fill-opacity: 0.4;
+    cursor: pointer;
 }
 
 #calendar-view .calendar-day-box.selected {
@@ -103,8 +116,9 @@ span#date-info {
 }
 
 #calendar-view .calendar-day-box.empty {
-    fill: white;
     stroke-width: 0;
+    fill-opacity: 0;
+    pointer-events: none;
 }
 
 #calendar-view .calendar-day-text {
@@ -112,4 +126,62 @@ span#date-info {
     dominant-baseline: middle;
     font-size: 1.2em;
     letter-spacing: .05em;
+    pointer-events: none;
+}
+
+.bg-uac-moderate-low {
+    fill: url(#uac-moderate-low);
+}
+
+.bg-uac-considerate-low {
+    fill: url(#uac-considerate-low);
+}
+
+.bg-uac-considerate-moderate {
+    fill: url(#uac-considerate-moderate);
+}
+
+.bg-uac-high-low {
+    fill: url(#uac-high-low);
+}
+
+.bg-uac-high-moderate {
+    fill: url(#uac-high-moderate);
+}
+
+.bg-uac-high-considerate {
+    fill: url(#uac-high-considerate);
+}
+
+.uac-low,
+.bg-uac-low-low {
+    fill: #00c346;
+    stop-color: #00c346;
+    background-color: #00c346;
+}
+
+.uac-moderate,
+.bg-uac-moderate-moderate {
+    fill: #fcfc00;
+    stop-color: #fcfc00;
+    background-color: #fcfc00;
+}
+
+.uac-considerate,
+.bg-uac-considerate-considerate {
+    fill: #ff9100;
+    stop-color: #ff9100;
+    background-color: #ff9100;
+}
+
+.uac-high,
+.bg-uac-high-high {
+    fill: #cc332c;
+    stop-color: #cc332c;
+    background-color: #cc332c;
+}
+
+.uac-extreme {
+    stop-color: #222222;
+    background-color: #222222;
 }

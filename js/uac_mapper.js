@@ -1,14 +1,5 @@
-class UACMapper {
-    static get byId() {
-        return this.CLASSES;
-    }
-    static get byAspect() {
-        return this.ASPECTS;
-    }
-    static get byElevation() {
-        return this.ELEVATIONS;
-    }
-}
+class UACMapper {}
+
 UACMapper.LOW_ELEVATION = 'Below 8,000 ft';
 UACMapper.LOW_ELEVATION_IDS = {
     min: 1,
@@ -154,5 +145,5 @@ UACMapper.CLASSES = [
         'Elevation': UACMapper.HIGH_ELEVATION
     }
 ];
-UACMapper.ASPECTS = d3.group(UACMapper.CLASSES, d => d['Aspect'])
-UACMapper.ELEVATIONS = d3.group(UACMapper.CLASSES, d => d['Elevation'])
+UACMapper.ASPECTS = d3.group(UACMapper.CLASSES, d => d['Aspect']);
+UACMapper.ELEVATIONS = d3.group(UACMapper.CLASSES, d => d['Elevation']);

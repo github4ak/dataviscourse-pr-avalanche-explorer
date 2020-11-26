@@ -14,31 +14,28 @@ class Rose {
     }
 
     petalInfoText(d) {
-        const petalInfo = UACMapper.byId[d.data];
-        return `${petalInfo.Aspect} - ${petalInfo.Elevation}`
+        const petalInfo = UACMapper.CLASSES[d.data];
+        return '<i>Rose Filter</i>' +
+               `${petalInfo.Aspect} - ${petalInfo.Elevation}`
     }
 
     highlightPetal(petal, d, force = false) {
-        
         if (this.map.selection === undefined || force) {
             this.clearHighlightPetal(force);
             d3.select(petal).classed('hover', true).raise();
-            console.log(d3.select(petal.parentNode.parentNode))
-            d3.select(petal.parentNode.parentNode).selectAll('path').each(function(){
-               if(d3.select(this).attr("class") != "petal hover"){
-                    d3.select(this).classed('opaque', true);
-               }
-            })
-            this.toolTip
-                .classed('hidden', false)
-                .html(this.petalInfoText(d));
+            d3.selectAll('.petal:not(.hover)').classed('opaque', true);
+            this.roseInfo.html(this.petalInfoText(d));
+        } else if (petal) {
+            d3.select(petal).classed('hover', true).raise();
         }
     }
 
     clearHighlightPetal(force = false) {
         if (this.map.selection === undefined || force) {
-            this.svg.selectAll('.petal').classed('hover', false).classed('opaque', false);
-            this.toolTip.text('').classed('hidden', true);
+            this.svg.selectAll('.petal').attr('class', 'petal');
+            this.roseInfo.html('');
+        } else {
+            d3.select('.hover.opaque').classed('hover', false);
         }
     }
 
@@ -60,7 +57,6 @@ class Rose {
             .on('click', (e, d) => {
                 e.stopPropagation();
                 this.map.selection = [d.data];
-                this.map.redraw();
                 this.menu.clear();
                 this.highlightPetal(e.currentTarget, d, true);
             });
@@ -86,8 +82,8 @@ class Rose {
                 e.stopPropagation();
                 if (this.map.selection === undefined) return;
                 this.map.selection = undefined;
+                this.map.removeMarker();
                 this.menu.clear();
-                this.map.redraw();
                 this.clearHighlightPetal(true);
             });
 
@@ -110,10 +106,7 @@ class Rose {
             .attr('class', 'petal-label')
             .text((d) => d.data);
 
-        this.toolTip = div
-            .append('span')
-            .attr("id", "petal-info")
-            .classed('hidden', true);
+        this.roseInfo = d3.select('span#rose-info');
 
         this.menu.addOptions();
     }
