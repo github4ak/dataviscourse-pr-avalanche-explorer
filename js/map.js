@@ -23,15 +23,14 @@ class AreaMap {
 
     removeMarker() {
         if (this._currentMarker) this.currentMarker.remove();
+        this.markerInfo.text('');
     }
 
     moveMarker(e) {
         this.removeMarker();
         this.currentMarker = L.marker(e.latlng);
         this.currentMarker.addTo(this.baseLayer);
-        this.currentMarker.bindPopup(
-            this.infoAtLatLng(e.latlng.lat, e.latlng.lng)
-        ).openPopup();
+        this.infoAtLatLng(e.latlng.lat, e.latlng.lng)
     }
 
     get uacClassInfo() {
@@ -60,7 +59,8 @@ class AreaMap {
 
     constructor() {
         this.addBaseLayer();
-        this.infoBox = d3.select(`#date-info`);
+        this.dateInfo = d3.select(`span#date-info`);
+        this.markerInfo = d3.select('span#marker-info')
 
         return fetch(MapData.uacClasses)
             .then(response => response.arrayBuffer())
@@ -148,17 +148,20 @@ class AreaMap {
             const y = this.latToRasterY(lat);
             const uacID = this.uacClassInfo[y][x];
             const info = UACMapper.CLASSES[uacID]
-            return `UAC class: ${info.Elevation}</br>` +
+            this.markerInfo.html(
+                '<i>Marker</i>' +
+                `${info.Elevation}</br>` +
                 `Aspect: ${info.Aspect}</br>` +
-                `Slope Angle: ${this.slopeInfo[y][x]}`;
+                `Slope Angle: ${this.slopeInfo[y][x]}`
+            );
         } catch (err) {
-            return 'No value';
+            console.error('No value');
         }
     }
 
     showForecast(forecast, date) {
         this.selection = undefined;
-        this.infoBox.text(date.toLocaleDateString());
+        this.dateInfo.text(date.toLocaleDateString());
         this.forecast = forecast;
         this.redraw();
     }

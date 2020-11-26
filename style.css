@@ -46,7 +46,7 @@
 }
 
 span#petal-info,
-span#date-info {
+span#map-info {
     position: absolute;
     left: 0;
     display: block;
@@ -66,12 +66,23 @@ span#petal-info.hidden {
     opacity: 0;
 }
 
-span#date-info {
+span#map-info {
     bottom: 0;
     margin-left: 15px;
     padding: .3em 1em;
     border: 3px solid darkslategray;
     font-size: 1.1em;
+    text-align: left;
+}
+
+span#map-info i {
+    font-weight: 600;
+    display: block;
+}
+
+span#map-info > span {
+    display: block;
+    float: none;
 }
 
 #dropdown-view {
