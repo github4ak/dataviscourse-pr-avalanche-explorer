@@ -14,7 +14,7 @@ class Rose {
     }
 
     petalInfoText(d) {
-        const petalInfo = UACMapper.byId[d.data];
+        const petalInfo = UACMapper.CLASSES[d.data];
         return `${petalInfo.Aspect} - ${petalInfo.Elevation}`
     }
 

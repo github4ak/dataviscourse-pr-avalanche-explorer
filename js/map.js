@@ -147,7 +147,7 @@ class AreaMap {
             const x = this.lngToRasterX(lng);
             const y = this.latToRasterY(lat);
             const uacID = this.uacClassInfo[y][x];
-            const info = UACMapper.byId[uacID]
+            const info = UACMapper.CLASSES[uacID]
             return `UAC class: ${info.Elevation}</br>` +
                 `Aspect: ${info.Aspect}</br>` +
                 `Slope Angle: ${this.slopeInfo[y][x]}`;
