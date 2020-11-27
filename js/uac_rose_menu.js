@@ -58,6 +58,9 @@ class RoseMenu {
                 .classed('hover', true)
                 .raise();
             d3.selectAll('.petal:not(.hover)').classed('opaque', true);
+            this.rose.roseInfo.html(`<i>Rose Filter</i>${menu.value}`);
+        } else {
+            this.rose.roseInfo.html('');
         }
     }
 }
