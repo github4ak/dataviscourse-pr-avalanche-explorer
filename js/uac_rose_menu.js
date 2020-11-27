@@ -40,16 +40,24 @@ class RoseMenu {
     }
 
     updateMap(menu, data) {
-        this.rose.map.selection = data.get(
-            menu.options[menu.selectedIndex].value
-        ).map(a => a.ID);
+        let selection = menu.selectedIndex;
+        if (selection === 0) {
+            selection = undefined;
+        } else {
+            selection = data.get(
+                menu.options[selection].value
+            ).map(a => a.ID);
+        }
+        this.rose.map.selection = selection;
         this.rose.clearHighlightPetal(true);
-        this.rose.svg.selectAll('.petal')
-            .filter((d) => {
-                return this.rose.map.selection.includes(d.data);
-            })
-            .classed('hover', true)
-            .raise();
-        d3.selectAll('.petal:not(.hover)').classed('opaque', true);
+        if (selection) {
+            this.rose.svg.selectAll('.petal')
+                .filter((d) => {
+                    return this.rose.map.selection.includes(d.data);
+                })
+                .classed('hover', true)
+                .raise();
+            d3.selectAll('.petal:not(.hover)').classed('opaque', true);
+        }
     }
 }
