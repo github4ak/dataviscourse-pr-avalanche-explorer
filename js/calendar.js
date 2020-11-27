@@ -1,8 +1,8 @@
 class Calendar {
-    constructor(rose, map, info) {
+    constructor(rose, map) {
         this.rose = rose;
         this.map = map;
-        this.info = info;
+        this.info = new Info();
     }
 
     show() {
