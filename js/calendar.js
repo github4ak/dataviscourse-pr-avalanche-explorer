@@ -1,7 +1,8 @@
 class Calendar {
-    constructor(rose, map) {
+    constructor(rose, map, info) {
         this.rose = rose;
         this.map = map;
+        this.info = info;
     }
 
     show() {
@@ -75,6 +76,7 @@ class Calendar {
         const forecast = this.data.get(date.toJSON()).values;
         this.map.showForecast(forecast, date);
         this.rose.showForecast(forecast);
+        this.info.showTextInfo(date);
     }
 }
 
