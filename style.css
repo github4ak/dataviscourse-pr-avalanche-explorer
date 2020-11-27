@@ -44,6 +44,7 @@
     text-anchor: middle;
     letter-spacing: .1rem;
     font-weight: 600;
+    pointer-events: none;
 }
 
 span#petal-info,
