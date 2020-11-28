@@ -6,9 +6,11 @@ class Info{
     constructor() {
         this.forecastLink = document.getElementById("daily-forecast");
         this.observationLink = document.getElementById("daily-observations");
+        this.currentDateSpan = document.getElementById("info-view-date")
     }
 
     showTextInfo(date){
+        this.currentDateSpan.textContent = date.toLocaleDateString();
         this.updateForecast(date);
         this.updateObservation(date);
     }
