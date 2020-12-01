@@ -12,3 +12,19 @@ Links:
 Authors:
 * [Joachim Meyer](https://github.com/jomey)
 * [Abishek Krishnan](https://github.com/github4ak)
+
+
+## Project folder structure:
+### `data`
+Required data sources used by the visualization
+### `dev`
+Optional - Helper script during development
+### `docs`
+Supplemental information on data pre-processing
+### `images`
+Images used in the visualization
+### `js`
+Javascript sources
+
+Central file is `script.js`, which is responsible to initialize the visualization.
+Each component on the page corresponds via file name what logic it contains.
