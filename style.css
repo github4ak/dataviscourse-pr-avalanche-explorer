@@ -78,6 +78,7 @@ span#map-info {
     border: 3px solid darkslategray;
     font-size: 1.1em;
     text-align: left;
+    text-transform: capitalize;
 }
 
 span#map-info i {

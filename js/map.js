@@ -149,10 +149,11 @@ class AreaMap {
             const x = this.lngToRasterX(lng);
             const y = this.latToRasterY(lat);
             const uacID = this.uacClassInfo[y][x];
-            const info = UACMapper.CLASSES[uacID]
+            const info = UACMapper.CLASSES[uacID];
             this.markerInfo.html(
                 '<i>Marker</i>' +
                 `${info.Elevation}</br>` +
+                `Forecast: ${AvalancheDangerColor.LEVELS[this.forecast[uacID]]}</br>` +
                 `Aspect: ${info.Aspect}</br>` +
                 `Slope Angle: ${this.slopeInfo[y][x]}`
             );
