@@ -16,7 +16,8 @@ class Rose {
     petalInfoText(d) {
         const petalInfo = UACMapper.CLASSES[d.data];
         return '<i>Rose Filter</i>' +
-               `${petalInfo.Aspect} - ${petalInfo.Elevation}`
+               `${petalInfo.Aspect} - ${petalInfo.Elevation}<br/>` +
+               `Forecast: ${AvalancheDangerColor.LEVELS[d.forecast]}`
     }
 
     highlightPetal(petal, d, force = false) {
@@ -117,7 +118,8 @@ class Rose {
         this.svg
             .selectAll('.petal')
             .attr("fill", (d) => {
-                return AvalancheDangerColor.colorForId(forecast[d.data])
+                d['forecast'] = forecast[d.data];
+                return AvalancheDangerColor.colorForId(d.forecast)
             });
     }
 }
