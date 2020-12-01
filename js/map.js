@@ -164,6 +164,7 @@ class AreaMap {
 
     showForecast(forecast, date) {
         this.selection = undefined;
+        this.removeMarker();
         this.dateInfo.text(date.toLocaleDateString());
         this.forecast = forecast;
         this.redraw();
