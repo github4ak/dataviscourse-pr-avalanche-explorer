@@ -1,3 +1,7 @@
+/*
+  Class that maps categorical ID's in the data to individual petals
+  on the avalanche rose.
+ */
 class UACMapper {}
 
 UACMapper.LOW_ELEVATION = 'Below 8,000 ft';
