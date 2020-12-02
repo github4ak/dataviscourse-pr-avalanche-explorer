@@ -1,14 +1,20 @@
+# 'GDAL' is the output, when using the `gdaldem aspect` command line tool.
+# 'Aspect" is the category from the avalanche rose.
+# 'Class' is the assigned category in the output product.
+
 GDAL | Aspect | Class
-0      North    1
-45     NE       2
-90     East     3
-135    SE       4
-180    South    5
-215    SW       6
-270    West     7
-315    NW       8
+0      North      1
+45     NE         2
+90     East       3
+135    SE         4
+180    South      5
+215    SW         6
+270    West       7
+315    NW         8
 
 # Raster math
+# 'LCC_aspect_30m' was the name of the raster layer and '@1'
+# the band number of the file.
 
 ("LCC_aspect_30m@1" >= 337.5 AND "LCC_aspect_30m@1" <= 360) * 1 +
 ("LCC_aspect_30m@1" >= 0 AND "LCC_aspect_30m@1" < 22.5) * 1 +

@@ -1,3 +1,6 @@
+/*
+  Helper class to parse CSV data.
+ */
 class UACForecasts {
     static parseLevel(levelData) {
         let values = {};
