@@ -4,7 +4,7 @@
 
 ## Overview
 This project visualizes information present in [Utah Avalanche Center](https://utahavalanchecenter.org) website using [D3](https://d3js.org/). <br/>
-It was submitted as part of [University of Utah](https://www.cs.utah.edu/)'s Fall 2020 edition of CS 6630 Visualization for Data Science class project.
+It was submitted as part of [University of Utah](https://www.cs.utah.edu/)'s Fall 2020 edition of CS 6630 Visualization for Data Science class project.<br/>
 ![](uacfe.gif)
 
 ## Installation
