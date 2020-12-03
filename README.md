@@ -9,7 +9,7 @@ It was submitted as part of [University of Utah](https://www.cs.utah.edu/)'s Fal
 No package requirements.<br/>
 We used [Visual Studio](https://code.visualstudio.com/) as our editor along with [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for live reloads.
 
-## Authors and acknowledgment
+## Authors
 * [Abishek Krishnan](https://github.com/github4ak)
 * [Joachim Meyer](https://github.com/jomey)
 
