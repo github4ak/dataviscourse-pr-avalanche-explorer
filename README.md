@@ -2,6 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![version](https://img.shields.io/badge/version-1.0.0-yellow.svg)](https://semver.org)
 
+## Overview
 This project visualizes information present in [Utah Avalanche Center](https://utahavalanchecenter.org) website using [D3](https://d3js.org/). <br/>
 It was submitted as part of [University of Utah](https://www.cs.utah.edu/)'s Fall 2020 edition of CS 6630 Visualization for Data Science class project.
 
