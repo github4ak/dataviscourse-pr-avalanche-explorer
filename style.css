@@ -194,3 +194,33 @@ span#map-info > span {
 #info-view {
     font-size: 1.2em;
 }
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child.heading {
+    flex-basis: 85%;
+} 
+
+.flex-child.video-link {
+    flex-basis: 7.5%;
+}
+
+.flex-child.github-link {
+    flex-basis: 7.5%;
+} 
+
+.fa.fa-youtube-play {
+    font-size:24px;
+    color:red;
+}
+
+.fa.fa-github {
+    font-size:24px;
+    color:black;
+}
+
+.display-4.text-center.p-md-3.heading {
+    width: 125%;
+}

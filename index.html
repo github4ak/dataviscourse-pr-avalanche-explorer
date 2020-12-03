@@ -19,15 +19,33 @@
           href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin=""/>
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
-          <h1 class="display-4 text-center p-md-3">
+        <div class="col-12  flex-container">
+          <div class="flex-child heading">
+          <h1 class="display-4 text-center p-md-3 heading">
             Utah Avalanche Center Forecast Explorer
           </h1>
+          </div>
+          <div class="display-4 text-center p-md-3 flex-child video-link">
+            <a href="https://www.youtube.com/watch?v=2J-Xp8WJ9pQ&feature=youtu.be" target="_blank">
+              <i class="fa fa-youtube-play">
+                YouTube
+              </i>
+            </a>
+          </div>
+          <div class="display-4 text-center p-md-3 flex-child github-link">
+            <a href="https://github.com/UofU-Cryosphere/dataviscourse-pr-avalanche-explorer" target="_blank">
+              <i class="fa fa-github">
+                GitHub
+              </i>
+            </a>
+          </div>          
         </div>
       </div>
       <div class="row">
@@ -125,14 +143,6 @@
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 text-right">
-          Project info on
-          <span>
-            <a href="https://github.com/UofU-Cryosphere/dataviscourse-pr-avalanche-explorer" target="_blank">GitHub</a>
-          </span>
         </div>
       </div>
     </div>
